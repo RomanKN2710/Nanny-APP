@@ -26,6 +26,9 @@
   --display:"Fraunces", "Iowan Old Style", Georgia, serif;
   --body:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   --radius:18px;
+  --r-wall:#E9F0EC; --r-wall2:#DCE6E0; --r-floor:#DDD2C5; --r-floor-line:#CFC2B3; --r-wood:#BE9068; --r-wood-d:#A07652;
+  --r-sofa:#E8C4B9; --r-sofa-d:#D8A597; --r-green:#2C5E55; --r-leaf:#4C8471; --r-leaf2:#6FA38E; --r-white:#FFFFFF; --r-metal:#C6D0CB;
+  --r-dark:#1F4640; --r-screen:#122A25; --r-sky1:#F7E3D6; --r-sky2:#CFE3DC; --r-light:rgba(255,241,214,.6); --r-glow:#FFE7BD; --r-pot:#D8CFC6;
   --gutter:clamp(16px, 4vw, 40px);
   --max:1180px;
   color-scheme:light;
@@ -36,6 +39,9 @@
     --eucalyptus:#A9D2C6; --eucalyptus-2:#7FB5A6; --berry:#E48DA5; --berry-soft:#B85F79;
     --ink:#E9EFEC; --ink-2:#A7B7B2; --line:#2C3D38; --on-dark:#111A18;
     --shadow:0 20px 50px -24px rgba(0,0,0,.7);
+    --r-wall:#20302B; --r-wall2:#1A2824; --r-floor:#2C2723; --r-floor-line:#36302A; --r-wood:#7C5B41; --r-wood-d:#664A34;
+    --r-sofa:#7A4E59; --r-sofa-d:#653F49; --r-green:#4F8F80; --r-leaf:#3E6F60; --r-leaf2:#548877; --r-white:#C9D3CF; --r-metal:#4C5D58;
+    --r-dark:#0E1916; --r-screen:#08110F; --r-sky1:#3A3350; --r-sky2:#1D3440; --r-light:rgba(255,226,180,.08); --r-glow:#FFD79A; --r-pot:#4A4540;
     color-scheme:dark;
   }
 }
@@ -44,6 +50,9 @@
   --eucalyptus:#A9D2C6; --eucalyptus-2:#7FB5A6; --berry:#E48DA5; --berry-soft:#B85F79;
   --ink:#E9EFEC; --ink-2:#A7B7B2; --line:#2C3D38; --on-dark:#111A18;
   --shadow:0 20px 50px -24px rgba(0,0,0,.7);
+  --r-wall:#20302B; --r-wall2:#1A2824; --r-floor:#2C2723; --r-floor-line:#36302A; --r-wood:#7C5B41; --r-wood-d:#664A34;
+  --r-sofa:#7A4E59; --r-sofa-d:#653F49; --r-green:#4F8F80; --r-leaf:#3E6F60; --r-leaf2:#548877; --r-white:#C9D3CF; --r-metal:#4C5D58;
+  --r-dark:#0E1916; --r-screen:#08110F; --r-sky1:#3A3350; --r-sky2:#1D3440; --r-light:rgba(255,226,180,.08); --r-glow:#FFD79A; --r-pot:#4A4540;
   color-scheme:dark;
 }
 
@@ -197,6 +206,95 @@ section{padding-block:clamp(64px,9vw,120px)}
 .cv li b{font-weight:600;color:var(--eucalyptus-2);font-variant-numeric:tabular-nums}
 .sig{margin-top:26px;font:italic 400 1.6rem/1 var(--display);color:var(--eucalyptus)}
 
+/* Practice tour */
+.tour-grid{display:grid;grid-template-columns:1.7fr 1fr;gap:clamp(24px,4vw,48px);align-items:center}
+.stage{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:28px 28px 28px 120px;overflow:hidden;box-shadow:var(--shadow);background:var(--r-wall);isolation:isolate}
+.scene{position:absolute;inset:0;margin:0;clip-path:circle(0% at 50% 100%);transition:clip-path 1.2s cubic-bezier(.7,0,.2,1);z-index:1}
+.scene.active{clip-path:circle(150% at 50% 100%);z-index:3}
+.scene.prev{clip-path:circle(150% at 50% 100%);z-index:2;transition:none}
+.scene:not(.active):not(.prev) *{animation-play-state:paused!important}
+.scene>svg,.scene>img{display:block;width:100%;height:100%;object-fit:cover}
+.scene>img{animation:kenburns 16s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.12) translate(-2%,-1%)}}
+.scene.active .pop{animation:popIn .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
+@keyframes popIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.rs .wall{fill:var(--r-wall)}.rs .floor{fill:var(--r-floor)}.rs .base{fill:var(--r-wall2)}
+.rs .fl{stroke:var(--r-floor-line);stroke-width:2;fill:none}
+.rs .frame{fill:none;stroke:var(--r-white);stroke-width:6}
+.rs .wood{fill:var(--r-wood)}.rs .woodd{fill:var(--r-wood-d)}.rs .faint{opacity:.35}
+.rs .white{fill:var(--r-white)}.rs .metal{fill:var(--r-metal)}.rs .dark{fill:var(--r-dark)}.rs .screen{fill:var(--r-screen)}
+.rs .sofa{fill:var(--r-sofa)}.rs .sofad{fill:var(--r-sofa-d)}.rs .green{fill:var(--r-green)}.rs .berry{fill:var(--berry-soft)}
+.rs .leaf{fill:var(--r-leaf)}.rs .leaf2{fill:var(--r-leaf2)}.rs .pot{fill:var(--r-pot)}
+.rs .shadow{fill:#000;opacity:.07}.rs .shade2{fill:#000;opacity:.05}
+.rs .blind{fill:var(--r-white);opacity:.8}
+.rs .dipl{fill:none;stroke:var(--r-metal);stroke-width:2}
+.rs .sky1{stop-color:var(--r-sky1)}.rs .sky2{stop-color:var(--r-sky2)}
+.sky1{stop-color:var(--r-sky1)}.sky2{stop-color:var(--r-sky2)}
+.g1{stop-color:var(--r-glow);stop-opacity:.75}.g0{stop-color:var(--r-glow);stop-opacity:0}
+.wood{fill:var(--r-wood)}.woodd{fill:var(--r-wood-d)}.blind{fill:var(--r-white);opacity:.8}
+.rs .line,.rs .rod,.rs .lampline,.rs .cord{fill:none;stroke:var(--r-dark);stroke-width:2.5;stroke-linecap:round}
+.rs .rod{stroke:var(--r-metal);stroke-width:4}
+.rs .lampline{stroke-width:4}
+.rs .arm{fill:none;stroke:var(--r-metal);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.rs .legs{fill:none;stroke:var(--r-wood-d);stroke-width:6;stroke-linecap:round}
+.rs .shelf{stroke:var(--r-wood);stroke-width:6}
+.rs .shade{fill:var(--r-green)}
+.rs .logo{fill:none;stroke:var(--r-white);stroke-width:4}
+.rs .logo2{fill:none;stroke:var(--berry-soft);stroke-width:4;stroke-linecap:round}
+.rs .svgtxt{font:400 22px var(--display);fill:var(--r-white)}
+.rs .stem{fill:none;stroke:var(--r-leaf);stroke-width:2.5;stroke-linecap:round}
+.rs .scrl{stroke:var(--r-leaf2);stroke-width:3;stroke-linecap:round;animation:blink 3s steps(1) infinite}
+.rs .artline{fill:none;stroke:var(--r-green);stroke-width:4;stroke-linecap:round}
+.rs .ring{fill:none;stroke:var(--r-dark);stroke-width:2}
+.rs .hand{stroke:var(--r-dark);stroke-width:3.5;stroke-linecap:round}.rs .hand.thin{stroke-width:2}
+.rs .drape{fill:var(--r-white);opacity:.72}
+.rs .pleat{stroke:var(--r-wall2);stroke-width:2;fill:none}
+.rs .paper{stroke:var(--r-white);stroke-width:10;stroke-linecap:round;opacity:.9}
+.rs .keys{stroke:var(--r-metal);stroke-width:3;stroke-linecap:round}
+.rs .fan{fill:var(--r-leaf2);opacity:.28}
+.rs .speck{fill:none;stroke:var(--r-leaf2);stroke-width:1.5;opacity:.6}
+.rs .fanobj{fill:var(--r-leaf2);opacity:.75}
+.rs .beat{fill:var(--berry-soft);transform-box:fill-box;transform-origin:center;animation:beat 1s ease-in-out infinite}
+.rs .scanline{stroke:var(--r-leaf2);stroke-width:1.5;opacity:.9;transform-box:view-box;transform-origin:656px 172px;animation:scan 2.6s ease-in-out infinite alternate}
+.rs .beam{fill:var(--r-light);animation:beam 7s ease-in-out infinite}
+.rs .motes circle{fill:var(--r-white);opacity:0;animation:mote 6s ease-in-out infinite}
+.rs .sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway 5s ease-in-out infinite}
+.rs .pend{transform-box:view-box;animation:pend 6s ease-in-out infinite}
+.rs .glow{animation:glow 4s ease-in-out infinite}
+.rs .curtain{transform-box:fill-box;transform-origin:50% 0;animation:curtain 7s ease-in-out infinite}
+.rs .steam path{fill:none;stroke:var(--r-metal);stroke-width:2.5;stroke-linecap:round;animation:steam 3s ease-out infinite}
+.rs .blinds{animation:blinds 9s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+@keyframes pend{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
+@keyframes glow{0%,100%{opacity:.75}50%{opacity:1}}
+@keyframes beam{0%,100%{opacity:.7}50%{opacity:1}}
+@keyframes curtain{0%,100%{transform:skewX(-1.5deg)}50%{transform:skewX(1.5deg)}}
+@keyframes steam{0%{opacity:0;transform:translateY(6px)}40%{opacity:.9}100%{opacity:0;transform:translateY(-16px)}}
+@keyframes mote{0%{opacity:0;transform:translate(0,0)}30%{opacity:.8}100%{opacity:0;transform:translate(18px,-60px)}}
+@keyframes scan{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.6)}30%{transform:scale(1)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes blinds{0%,100%{opacity:1}50%{opacity:.85}}
+.rooms{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.rooms li{border-bottom:1px solid var(--line)}
+.rooms button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:40px 1fr;gap:4px 12px;width:100%;padding:20px 0 22px;position:relative}
+.rooms button:focus-visible{outline:2px solid var(--berry);outline-offset:4px;border-radius:6px}
+.rooms .n{font:400 1.5rem/1 var(--display);color:var(--ink-2);transition:color .4s;font-variant-numeric:tabular-nums}
+.rooms .nm{display:block;font:400 1.4rem/1.2 var(--display);transition:color .4s}
+.rooms .ds{display:block;color:var(--ink-2);font-size:.95rem;line-height:1.5;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s cubic-bezier(.2,.8,.2,1),opacity .5s,margin .5s}
+.rooms button.active .ds{max-height:8em;opacity:1;margin-top:8px}
+.rooms button.active .n,.rooms button.active .nm{color:var(--berry)}
+.rooms button:hover .nm{color:var(--berry)}
+.rooms .bar{position:absolute;left:0;right:0;bottom:-1px;height:2px;overflow:hidden}
+.rooms .bar i{position:absolute;inset:0;background:var(--berry);transform:scaleX(0);transform-origin:left}
+.rooms button.active .bar i{animation:fillbar 7s linear forwards}
+.tour.paused .rooms .bar i,.tour.offscreen .rooms .bar i{animation-play-state:paused}
+@keyframes fillbar{to{transform:scaleX(1)}}
+@media (max-width:820px){
+  .tour-grid{grid-template-columns:1fr}
+  .stage{border-radius:22px 22px 22px 70px}
+}
+
 /* Hours & Contact */
 .visit .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .panel{background:var(--surface);border-radius:var(--radius);padding:clamp(24px,3.5vw,40px);border:1px solid var(--line)}
@@ -311,6 +409,7 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12p
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .botanic path{stroke-dashoffset:0}
+  .scene{transition:none}
   .marquee{animation:none}
 }
 </style>
@@ -512,6 +611,259 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12p
   </div>
 </section>
 
+<section class="tour" id="rundgang">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="sky1"/><stop offset="1" class="sky2"/></linearGradient>
+      <radialGradient id="glowg"><stop offset="0" class="g1"/><stop offset="1" class="g0"/></radialGradient>
+      <pattern id="slat" width="18" height="20" patternUnits="userSpaceOnUse"><rect width="12" height="20" class="wood"/><rect x="12" width="6" height="20" class="woodd"/></pattern>
+      <pattern id="blindp" width="20" height="14" patternUnits="userSpaceOnUse"><rect width="20" height="8" class="blind"/></pattern>
+    </defs>
+  </svg>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow" data-i18n="t.eyebrow">Einblicke</span>
+        <h2 data-i18n="t.title">Ein Rundgang durch <em>die Praxis</em></h2>
+      </div>
+      <p class="lede" data-i18n="t.lede">Helle Räume, kurze Wege und viel Ruhe. So sieht Ihr Besuch bei uns aus.</p>
+    </div>
+    <div class="tour-grid">
+      <div class="stage" id="stage">
+        <!-- To use real photos: replace an <svg class="rs">…</svg> with <img src="photos/empfang.jpg" alt="…">. -->
+        <figure class="scene active" data-room="0">
+          <svg class="rs" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="800" height="372" class="wall"/>
+            <rect y="372" width="800" height="128" class="floor"/>
+            <path class="fl" d="M0 404H800M0 444H800"/>
+            <rect y="364" width="800" height="8" class="base"/>
+            <g class="pop" style="--d:.05s">
+              <path d="M56 364V170a74 74 0 0 1 148 0v194z" fill="url(#sky)"/>
+              <path class="frame" d="M56 364V170a74 74 0 0 1 148 0v194zM130 96v268M56 240h148"/>
+            </g>
+            <polygon class="beam" points="56,364 204,364 360,500 90,500"/>
+            <g class="motes"><circle cx="150" cy="430" r="2"/><circle cx="210" cy="470" r="1.6" style="animation-delay:-2s"/><circle cx="250" cy="440" r="2.2" style="animation-delay:-4s"/></g>
+            <g class="pop" style="--d:.15s">
+              <rect x="286" y="40" width="330" height="324" fill="url(#slat)"/>
+              <path class="logo" d="M432 190v-44a19 19 0 0 1 38 0v44"/>
+              <path class="logo2" d="M451 190v-22c0-6 4-10 9-11"/>
+              <text x="451" y="228" text-anchor="middle" class="svgtxt">Praxis Lumen</text>
+            </g>
+            <g class="pend" style="transform-origin:380px 0px">
+              <circle cx="380" cy="120" r="60" fill="url(#glowg)" class="glow"/>
+              <path class="cord" d="M380 0v92"/>
+              <path class="shade" d="M356 112a24 24 0 0 1 48 0z"/>
+            </g>
+            <g class="pend" style="transform-origin:522px 0px;animation-delay:-3s">
+              <circle cx="522" cy="120" r="60" fill="url(#glowg)" class="glow"/>
+              <path class="cord" d="M522 0v92"/>
+              <path class="shade" d="M498 112a24 24 0 0 1 48 0z"/>
+            </g>
+            <g class="pop" style="--d:.3s">
+              <ellipse cx="450" cy="470" rx="230" ry="10" class="shadow"/>
+              <rect x="246" y="246" width="408" height="14" rx="5" class="wood"/>
+              <path d="M258 260h384v196a10 10 0 0 1-10 10H268a10 10 0 0 1-10-10z" class="white"/>
+              <rect x="258" y="260" width="384" height="12" class="shade2"/>
+              <rect x="258" y="396" width="384" height="5" class="green"/>
+            </g>
+            <g class="pop" style="--d:.42s">
+              <rect x="540" y="196" width="74" height="48" rx="5" class="dark"/>
+              <rect x="546" y="202" width="62" height="36" rx="2" class="screen"/>
+              <path class="scrl" d="M552 212h34M552 220h46M552 228h24"/>
+              <rect x="573" y="244" width="8" height="3" class="metal"/>
+              <rect x="296" y="214" width="22" height="32" rx="8" class="metal"/>
+              <path class="stem" d="M307 214c0-26 8-40 22-46M307 214c-2-20-10-30-20-32"/>
+              <circle cx="329" cy="168" r="6" class="berry"/><circle cx="321" cy="180" r="5" class="berry"/><circle cx="287" cy="182" r="5" class="berry"/>
+              <path d="M372 246a8 8 0 0 1 16 0z" class="metal"/>
+            </g>
+            <g class="pop" style="--d:.5s">
+              <ellipse cx="728" cy="470" rx="46" ry="7" class="shadow"/>
+              <g class="sway">
+                <ellipse cx="712" cy="330" rx="16" ry="54" transform="rotate(-24 712 330)" class="leaf"/>
+                <ellipse cx="744" cy="322" rx="16" ry="58" transform="rotate(20 744 322)" class="leaf2"/>
+                <ellipse cx="728" cy="300" rx="15" ry="66" class="leaf"/>
+                <ellipse cx="702" cy="370" rx="12" ry="40" transform="rotate(-50 702 370)" class="leaf2"/>
+                <ellipse cx="756" cy="366" rx="12" ry="40" transform="rotate(48 756 366)" class="leaf"/>
+              </g>
+              <path d="M698 392h60l-8 76h-44z" class="pot"/>
+            </g>
+          </svg>
+        </figure>
+
+        <figure class="scene" data-room="1">
+          <svg class="rs" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="800" height="372" class="wall"/>
+            <rect y="372" width="800" height="128" class="floor"/>
+            <path class="fl" d="M0 404H800M0 444H800"/>
+            <rect y="364" width="800" height="8" class="base"/>
+            <g class="pop" style="--d:.05s">
+              <path d="M70 364V150a95 95 0 0 1 190 0v214z" fill="url(#sky)"/>
+              <path class="frame" d="M70 364V150a95 95 0 0 1 190 0v214zM165 55v309M70 250h190"/>
+            </g>
+            <polygon class="beam" points="70,364 260,364 440,500 110,500"/>
+            <g class="motes"><circle cx="190" cy="440" r="2"/><circle cx="260" cy="470" r="1.6" style="animation-delay:-2s"/><circle cx="320" cy="450" r="2.2" style="animation-delay:-4s"/></g>
+            <path class="rod" d="M40 44h300"/>
+            <g class="curtain"><path d="M262 48h56v316c-8 4-14-4-20 0s-12-4-18 0-12-4-18 0z" class="drape"/></g>
+            <g class="curtain" style="animation-delay:-3s"><path d="M40 48h30v316c-6 3-10-3-15 0s-10-3-15 0z" class="drape"/></g>
+            <g class="pop" style="--d:.15s">
+              <rect x="458" y="96" width="150" height="108" class="white"/>
+              <rect x="468" y="106" width="130" height="88" class="base"/>
+              <circle cx="516" cy="150" r="26" class="sofa"/>
+              <path class="artline" d="M540 186c6-28 24-42 50-44"/>
+            </g>
+            <g class="pop" style="--d:.2s">
+              <circle cx="690" cy="124" r="30" class="white"/>
+              <circle cx="690" cy="124" r="30" class="ring"/>
+              <line id="clock-h" x1="690" y1="124" x2="690" y2="108" class="hand"/>
+              <line id="clock-m" x1="690" y1="124" x2="690" y2="100" class="hand thin"/>
+              <circle cx="690" cy="124" r="2.5" class="berry"/>
+            </g>
+            <g class="pop" style="--d:.3s">
+              <ellipse cx="512" cy="462" rx="180" ry="9" class="shadow"/>
+              <path class="legs" d="M372 418v36M652 418v36"/>
+              <rect x="370" y="284" width="284" height="84" rx="22" class="sofa"/>
+              <rect x="360" y="352" width="304" height="56" rx="16" class="sofad"/>
+              <rect x="344" y="320" width="44" height="98" rx="18" class="sofa"/>
+              <rect x="636" y="320" width="44" height="98" rx="18" class="sofa"/>
+              <rect x="400" y="300" width="70" height="56" rx="14" class="green" transform="rotate(-6 435 328)"/>
+              <rect x="556" y="300" width="70" height="56" rx="14" class="berry" transform="rotate(5 591 328)"/>
+            </g>
+            <g class="pop" style="--d:.42s">
+              <ellipse cx="220" cy="470" rx="80" ry="7" class="shadow"/>
+              <path class="legs" d="M190 414l-14 50M250 414l14 50"/>
+              <ellipse cx="220" cy="410" rx="82" ry="14" class="wood"/>
+              <rect x="166" y="394" width="50" height="8" rx="2" class="berry"/>
+              <rect x="172" y="387" width="44" height="7" rx="2" class="green"/>
+              <path d="M240 384h24v10a12 12 0 0 1-24 0z" class="white"/>
+              <path class="line" d="M264 388a5 5 0 0 1 0 10"/>
+              <g class="steam"><path d="M246 378c-4-8 4-12 0-20"/><path d="M257 378c-4-8 4-12 0-20" style="animation-delay:-1.5s"/></g>
+            </g>
+            <g class="pop" style="--d:.5s">
+              <ellipse cx="740" cy="464" rx="26" ry="5" class="shadow"/>
+              <circle cx="740" cy="250" r="54" fill="url(#glowg)" class="glow"/>
+              <path class="lampline" d="M740 462V236"/>
+              <path d="M712 238a28 22 0 0 1 56 0z" class="white"/>
+            </g>
+          </svg>
+        </figure>
+
+        <figure class="scene" data-room="2">
+          <svg class="rs" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="800" height="372" class="wall"/>
+            <rect y="372" width="800" height="128" class="floor"/>
+            <path class="fl" d="M0 404H800M0 444H800"/>
+            <rect y="364" width="800" height="8" class="base"/>
+            <g class="pop" style="--d:.05s">
+              <rect x="540" y="80" width="200" height="220" fill="url(#sky)"/>
+              <rect x="540" y="80" width="200" height="220" fill="url(#blindp)" class="blinds"/>
+              <rect x="540" y="80" width="200" height="220" class="frame"/>
+            </g>
+            <polygon class="beam stripes" points="540,300 740,300 640,500 380,500"/>
+            <g class="pop" style="--d:.12s">
+              <rect x="54" y="92" width="170" height="272" class="woodd"/>
+              <rect x="62" y="100" width="154" height="256" class="base"/>
+              <path class="shelf" d="M62 164h154M62 232h154M62 300h154"/>
+              <rect x="70" y="118" width="14" height="43" class="green"/><rect x="86" y="112" width="10" height="49" class="berry"/><rect x="98" y="122" width="16" height="39" class="wood"/><rect x="116" y="116" width="12" height="45" class="dark"/>
+              <path d="M180 161h24v-20a12 12 0 0 0-24 0z" class="pot"/>
+              <g class="sway"><ellipse cx="186" cy="130" rx="6" ry="16" transform="rotate(-20 186 130)" class="leaf"/><ellipse cx="198" cy="128" rx="6" ry="16" transform="rotate(20 198 128)" class="leaf2"/></g>
+              <rect x="150" y="192" width="14" height="37" class="sofa"/><rect x="166" y="186" width="12" height="43" class="green"/><rect x="180" y="196" width="16" height="33" class="woodd"/><rect x="198" y="190" width="10" height="39" class="berry"/>
+              <circle cx="96" cy="212" r="16" class="metal"/>
+              <rect x="72" y="260" width="30" height="37" class="dark"/><rect x="104" y="266" width="12" height="31" class="sofa"/><rect x="118" y="262" width="14" height="35" class="wood"/>
+              <rect x="80" y="320" width="56" height="33" rx="3" class="white"/><rect x="146" y="320" width="56" height="33" rx="3" class="white"/>
+            </g>
+            <g class="pop" style="--d:.18s">
+              <rect x="292" y="96" width="70" height="90" class="white"/><rect x="302" y="106" width="50" height="70" class="dipl"/>
+              <rect x="378" y="110" width="60" height="76" class="white"/><rect x="386" y="118" width="44" height="60" class="dipl"/>
+            </g>
+            <g class="pop" style="--d:.3s">
+              <ellipse cx="460" cy="462" rx="190" ry="9" class="shadow"/>
+              <rect x="416" y="226" width="80" height="92" rx="18" class="dark"/>
+              <path class="legs" d="M318 322v134M602 322v134"/>
+              <rect x="318" y="322" width="284" height="56" class="woodd faint"/>
+              <rect x="300" y="310" width="320" height="14" rx="4" class="wood"/>
+              <path d="M468 310l10-48h72l10 48z" class="metal"/>
+              <circle cx="514" cy="286" r="5" class="white"/>
+              <rect x="400" y="303" width="44" height="7" class="white"/>
+              <circle cx="360" cy="276" r="46" fill="url(#glowg)" class="glow"/>
+              <path class="lampline" d="M336 310l14-48 26 12"/>
+              <path d="M370 264l26 12-12 16z" class="green"/>
+              <path d="M580 310h26l-4-22h-18z" class="pot"/>
+              <g class="sway"><ellipse cx="588" cy="272" rx="6" ry="18" transform="rotate(-18 588 272)" class="leaf"/><ellipse cx="600" cy="270" rx="6" ry="18" transform="rotate(18 600 270)" class="leaf2"/></g>
+            </g>
+            <g class="pop" style="--d:.45s">
+              <path class="legs" d="M340 420v42M410 420v42M510 420v42M580 420v42"/>
+              <rect x="326" y="342" width="96" height="84" rx="22" class="sofa"/>
+              <rect x="496" y="342" width="96" height="84" rx="22" class="sofad"/>
+            </g>
+          </svg>
+        </figure>
+
+        <figure class="scene" data-room="3">
+          <svg class="rs" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="800" height="372" class="wall"/>
+            <rect y="372" width="800" height="128" class="floor"/>
+            <path class="fl" d="M0 404H800M0 444H800"/>
+            <rect y="364" width="800" height="8" class="base"/>
+            <g class="pop" style="--d:.05s">
+              <circle cx="340" cy="96" r="44" fill="url(#sky)"/>
+              <path class="frame" d="M296 96a44 44 0 1 0 88 0a44 44 0 1 0-88 0M340 52v88M296 96h88"/>
+            </g>
+            <path class="rod" d="M30 44h240"/>
+            <g class="curtain">
+              <path d="M40 48h210v300c-15 8-20-8-35 0s-20-8-35 0-20-8-35 0-20-8-35 0-20-8-35 0-20-8-35 0z" class="drape"/>
+              <path class="pleat" d="M75 52v290M110 52v290M145 52v290M180 52v290M215 52v290"/>
+            </g>
+            <g class="pop" style="--d:.15s">
+              <circle cx="500" cy="140" r="70" fill="url(#glowg)" class="glow"/>
+              <path class="arm" d="M640 40h-80l-50 80"/>
+              <ellipse cx="506" cy="126" rx="30" ry="10" class="white"/>
+            </g>
+            <g class="pop" style="--d:.28s">
+              <ellipse cx="420" cy="466" rx="150" ry="9" class="shadow"/>
+              <rect x="360" y="440" width="130" height="18" rx="8" class="metal"/>
+              <rect x="410" y="370" width="30" height="72" rx="6" class="metal"/>
+              <rect x="350" y="350" width="160" height="26" rx="12" class="white"/>
+              <path d="M372 350l-62-112a14 14 0 0 1 6-18l14-6a14 14 0 0 1 18 6l60 130z" class="sofa"/>
+              <rect x="286" y="192" width="56" height="26" rx="12" transform="rotate(-28 314 205)" class="sofa"/>
+              <rect x="360" y="332" width="148" height="20" rx="10" class="sofa"/>
+              <rect x="498" y="340" width="74" height="20" rx="10" transform="rotate(22 498 350)" class="sofad"/>
+              <path class="paper" d="M334 224l50 110"/>
+            </g>
+            <g class="pop" style="--d:.4s">
+              <ellipse cx="656" cy="462" rx="66" ry="7" class="shadow"/>
+              <rect x="600" y="444" width="112" height="12" rx="6" class="metal"/>
+              <circle cx="610" cy="460" r="6" class="dark"/><circle cx="702" cy="460" r="6" class="dark"/>
+              <rect x="646" y="300" width="20" height="146" class="metal"/>
+              <path d="M604 296h104l-8 26h-88z" class="white"/>
+              <path class="keys" d="M618 304h76M622 312h68"/>
+              <rect x="652" y="236" width="8" height="60" class="metal"/>
+              <rect x="596" y="160" width="120" height="84" rx="6" class="dark"/>
+              <rect x="603" y="167" width="106" height="70" rx="3" class="screen"/>
+              <path d="M656 172l-38 58a72 72 0 0 0 76 0z" class="fan"/>
+              <path class="speck" d="M632 214a30 30 0 0 1 48 0M638 224a24 24 0 0 1 36 0"/>
+              <ellipse cx="656" cy="208" rx="11" ry="7" class="fanobj"/>
+              <circle cx="660" cy="206" r="2.2" class="beat"/>
+              <line class="scanline" x1="656" y1="172" x2="656" y2="236"/>
+            </g>
+            <g class="pop" style="--d:.5s">
+              <ellipse cx="560" cy="466" rx="30" ry="5" class="shadow"/>
+              <rect x="556" y="410" width="8" height="50" class="metal"/>
+              <ellipse cx="560" cy="408" rx="26" ry="8" class="dark"/>
+            </g>
+          </svg>
+        </figure>
+      </div>
+
+      <ol class="rooms" id="rooms">
+        <li><button type="button" class="active" data-i="0" aria-pressed="true"><span class="n">1</span><span class="txt"><span class="nm" data-i18n="t.1.n">Empfang</span><span class="ds" data-i18n="t.1.d">Unser Team begrüsst Sie, nimmt Ihre Versichertenkarte entgegen und beantwortet erste Fragen.</span></span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-i="1" aria-pressed="false"><span class="n">2</span><span class="txt"><span class="nm" data-i18n="t.2.n">Wartezimmer</span><span class="ds" data-i18n="t.2.d">Ein ruhiger Raum mit Tageslicht, Tee und Wasser. Meist warten Sie hier nur wenige Minuten.</span></span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-i="2" aria-pressed="false"><span class="n">3</span><span class="txt"><span class="nm" data-i18n="t.3.n">Sprechzimmer</span><span class="ds" data-i18n="t.3.d">Hier sprechen wir in Ruhe über Ihr Anliegen, bevor eine Untersuchung stattfindet.</span></span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-i="3" aria-pressed="false"><span class="n">4</span><span class="txt"><span class="nm" data-i18n="t.4.n">Untersuchungsraum</span><span class="ds" data-i18n="t.4.d">Moderne Ausstattung mit Ultraschall, eine Umkleide mit Sichtschutz und angenehme Wärme.</span></span><span class="bar"><i></i></span></button></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
 <section class="visit" id="besuch">
   <div class="wrap">
     <div class="sec-head">
@@ -609,6 +961,11 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12p
 /* ---------- Translations ---------- */
 const T = {
 de:{
+ "t.eyebrow":"Einblicke","t.title":"Ein Rundgang durch <em>die Praxis</em>","t.lede":"Helle Räume, kurze Wege und viel Ruhe. So sieht Ihr Besuch bei uns aus.",
+ "t.1.n":"Empfang","t.1.d":"Unser Team begrüsst Sie, nimmt Ihre Versichertenkarte entgegen und beantwortet erste Fragen.",
+ "t.2.n":"Wartezimmer","t.2.d":"Ein ruhiger Raum mit Tageslicht, Tee und Wasser. Meist warten Sie hier nur wenige Minuten.",
+ "t.3.n":"Sprechzimmer","t.3.d":"Hier sprechen wir in Ruhe über Ihr Anliegen, bevor eine Untersuchung stattfindet.",
+ "t.4.n":"Untersuchungsraum","t.4.d":"Moderne Ausstattung mit Ultraschall, eine Umkleide mit Sichtschutz und angenehme Wärme.",
  "brand.sub":"Frauenheilkunde & Geburtshilfe","nav.services":"Leistungen","nav.pregnancy":"Schwangerschaft","nav.about":"Über uns","nav.visit":"Sprechzeiten","nav.faq":"FAQ",
  "cta.book":"Termin anfragen","cta.services":"Unsere Leistungen",
  "hero.eyebrow":"Gynäkologie in Bern","hero.l1":"Frauengesundheit,","hero.l2":"mit Zeit und","hero.l3":"<em>Zuwendung</em> begleitet.",
@@ -654,6 +1011,11 @@ de:{
  "ft.big":"Wir freuen uns auf <em>Ihren Besuch.</em>","ft.practice":"Praxis","ft.legal":"Rechtliches","ft.imprint":"Impressum","ft.privacy":"Datenschutz","ft.member":"Mitglied FMH · gynécologie suisse"
 },
 fr:{
+ "t.eyebrow":"Aperçu","t.title":"Une visite <em>du cabinet</em>","t.lede":"Des pièces lumineuses, des trajets courts et beaucoup de calme. Voici comment se déroule votre visite.",
+ "t.1.n":"Accueil","t.1.d":"Notre équipe vous accueille, prend votre carte d’assurance et répond à vos premières questions.",
+ "t.2.n":"Salle d’attente","t.2.d":"Un espace calme et lumineux, avec thé et eau. L’attente est généralement de quelques minutes.",
+ "t.3.n":"Cabinet de consultation","t.3.d":"Nous parlons ici calmement de votre demande avant tout examen.",
+ "t.4.n":"Salle d’examen","t.4.d":"Équipement moderne avec échographe, cabine pour se changer à l’abri des regards et une température agréable.",
  "brand.sub":"Gynécologie & obstétrique","nav.services":"Prestations","nav.pregnancy":"Grossesse","nav.about":"À propos","nav.visit":"Horaires","nav.faq":"FAQ",
  "cta.book":"Prendre rendez-vous","cta.services":"Nos prestations",
  "hero.eyebrow":"Gynécologie à Berne","hero.l1":"La santé des femmes,","hero.l2":"accompagnée avec","hero.l3":"temps et <em>bienveillance</em>.",
@@ -699,6 +1061,11 @@ fr:{
  "ft.big":"Au plaisir de <em>vous accueillir.</em>","ft.practice":"Cabinet","ft.legal":"Mentions légales","ft.imprint":"Impressum","ft.privacy":"Protection des données","ft.member":"Membre FMH · gynécologie suisse"
 },
 en:{
+ "t.eyebrow":"A look inside","t.title":"A walk through <em>the practice</em>","t.lede":"Bright rooms, short distances and plenty of calm. This is what your visit looks like.",
+ "t.1.n":"Reception","t.1.d":"Our team welcomes you, takes your insurance card and answers your first questions.",
+ "t.2.n":"Waiting room","t.2.d":"A quiet, daylit room with tea and water. Most waits are only a few minutes.",
+ "t.3.n":"Consultation room","t.3.d":"Here we talk through your concerns calmly before any examination.",
+ "t.4.n":"Examination room","t.4.d":"Modern equipment including ultrasound, a screened changing area and a comfortably warm room.",
  "brand.sub":"Gynaecology & Obstetrics","nav.services":"Services","nav.pregnancy":"Pregnancy","nav.about":"About","nav.visit":"Opening hours","nav.faq":"FAQ",
  "cta.book":"Request appointment","cta.services":"Our services",
  "hero.eyebrow":"Gynaecology in Bern","hero.l1":"Women’s health,","hero.l2":"cared for with time","hero.l3":"and <em>attention</em>.",
@@ -843,7 +1210,7 @@ function updateJourney(){
 /* ---------- Scroll reveal (below-the-fold only) ---------- */
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 if ("IntersectionObserver" in window && !reduce){
-  const targets = document.querySelectorAll(".sec-head, .service, .stop, .note, .portrait, .about .wrap > div:last-child, .panel, .faq-list details, footer .top > div");
+  const targets = document.querySelectorAll(".sec-head, .stage, .rooms li, .service, .stop, .note, .portrait, .about .wrap > div:last-child, .panel, .faq-list details, footer .top > div");
   const io = new IntersectionObserver(es=>es.forEach(e=>{
     if (e.isIntersecting){ e.target.classList.add("reveal-in"); e.target.classList.remove("reveal-pending"); io.unobserve(e.target); }
   }), {rootMargin:"0px 0px -8% 0px"});
@@ -855,6 +1222,37 @@ if ("IntersectionObserver" in window && !reduce){
     }
   });
 }
+
+/* ---------- Practice tour ---------- */
+const tour = document.getElementById("rundgang"), scenes = tour.querySelectorAll(".scene"), roomBtns = tour.querySelectorAll(".rooms button");
+let cur = 0;
+function go(i){
+  if (i===cur) return;
+  scenes.forEach(sc=>sc.classList.remove("prev"));
+  scenes[cur].classList.remove("active"); scenes[cur].classList.add("prev");
+  scenes[i].classList.add("active");
+  roomBtns.forEach((b,k)=>{ b.classList.toggle("active", k===i); b.setAttribute("aria-pressed", String(k===i)); });
+  const old = cur; cur = i;
+  setTimeout(()=>{ if (cur!==old) scenes[old].classList.remove("prev"); }, 1300);
+}
+roomBtns.forEach(b=>b.addEventListener("click",()=>go(+b.dataset.i)));
+if (!reduce){
+  roomBtns.forEach(b=>b.querySelector(".bar i").addEventListener("animationend",()=>{ if (b.classList.contains("active")) go((cur+1)%scenes.length); }));
+  tour.addEventListener("mouseenter",()=>tour.classList.add("paused"));
+  tour.addEventListener("mouseleave",()=>tour.classList.remove("paused"));
+  if ("IntersectionObserver" in window){
+    new IntersectionObserver(es=>es.forEach(e=>tour.classList.toggle("offscreen", !e.isIntersecting))).observe(tour.querySelector(".stage"));
+  }
+} else {
+  tour.classList.add("paused");
+}
+/* waiting-room clock shows the real time */
+function tick(){
+  const n = new Date(), m = n.getMinutes(), h = n.getHours()%12 + m/60;
+  document.getElementById("clock-h").setAttribute("transform","rotate("+(h*30)+" 690 124)");
+  document.getElementById("clock-m").setAttribute("transform","rotate("+(m*6)+" 690 124)");
+}
+tick(); setInterval(tick, 30000);
 
 /* ---------- FAQ: one open at a time ---------- */
 const dets = document.querySelectorAll(".faq-list details");

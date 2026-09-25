@@ -31,3 +31,15 @@ The form validates input and shows a thank-you screen, but it does not send anyt
 ## Deploy
 
 Any static host works: Vercel, Netlify, Cloudflare Pages or GitHub Pages. Upload the `gyn-praxis` folder.
+
+## Practice tour and photos
+
+The "A look inside" section shows four illustrated, animated rooms (reception, waiting room, consultation room, examination room). They change automatically every 7 seconds and pause on hover. The waiting-room clock shows the real time.
+
+To use real photos, put them in `gyn-praxis/photos/` and replace the `<svg class="rs">…</svg>` inside each `<figure class="scene">` with an image, for example:
+
+```html
+<figure class="scene active" data-room="0"><img src="photos/empfang.jpg" alt="Empfang der Praxis"></figure>
+```
+
+Photos get a slow zoom automatically. Use landscape images, about 2000 × 1250 px (16:10).
