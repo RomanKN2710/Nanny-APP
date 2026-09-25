@@ -1,0 +1,85 @@
+@import "tailwindcss";
+@import "@fontsource-variable/nunito";
+
+@theme {
+  --font-sans: "Nunito Variable", ui-rounded, system-ui, sans-serif;
+
+  --color-cream: #fff8f1;
+  --color-paper: #ffffff;
+  --color-ink: #3b3355;
+  --color-ink-soft: #6f6889;
+  --color-line: #f1e6da;
+
+  --color-coral: #f2785c;
+  --color-coral-soft: #fde6df;
+  --color-mint: #3fae8c;
+  --color-mint-soft: #dcf3ea;
+  --color-sun: #f6c85f;
+  --color-sun-soft: #fdf1d3;
+  --color-sky: #5b9fd9;
+  --color-sky-soft: #e0eefa;
+  --color-lilac: #9a82cf;
+  --color-lilac-soft: #ece6f8;
+  --color-rose: #e0679a;
+  --color-rose-soft: #fbe3ee;
+
+  --radius-card: 1.5rem;
+  --shadow-soft: 0 1px 2px rgb(59 51 85 / 0.04), 0 8px 24px -12px rgb(59 51 85 / 0.18);
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+  }
+  input,
+  select,
+  textarea {
+    @apply w-full rounded-2xl border-2 border-line bg-white px-3.5 py-2.5 text-ink outline-none transition;
+    @apply focus:border-coral/60 focus:ring-4 focus:ring-coral/10;
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    @apply w-auto size-5 accent-coral p-0;
+  }
+  input[type="color"] {
+    @apply h-11 w-14 p-1;
+  }
+  label {
+    @apply text-sm font-semibold text-ink-soft;
+  }
+  dialog::backdrop {
+    background: rgb(59 51 85 / 0.35);
+    backdrop-filter: blur(2px);
+  }
+}
+
+@utility card {
+  @apply rounded-[var(--radius-card)] bg-paper p-5 shadow-[var(--shadow-soft)];
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 font-bold transition active:scale-[0.97] disabled:opacity-50;
+}
+
+@utility btn-primary {
+  @apply btn bg-coral text-white shadow-[0_6px_16px_-6px_var(--color-coral)] hover:brightness-105;
+}
+
+@utility btn-soft {
+  @apply btn bg-coral-soft text-coral hover:bg-coral/20;
+}
+
+@utility btn-ghost {
+  @apply btn bg-transparent px-3 text-ink-soft hover:bg-ink/5;
+}
+
+@utility chip {
+  @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold;
+}
+
+@utility field {
+  @apply flex flex-col gap-1.5;
+}
