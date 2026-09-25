@@ -8,7 +8,7 @@ A single-page website for a gynaecology practice, in German, French and English.
 - Live opening hours: today is highlighted, and an "open now / closed, opens Monday at 08:00" badge updates every minute.
 - Lake theme: glacier turquoise, pale sky and deep lake blue, with a pale pebble tone in the room illustrations.
 - Animations:
-  - The hero is a live lake drawn on a canvas: Alps mirrored in wobbling water, sun glints, a drifting sailboat and birds. Touching or clicking the water makes ripples (on desktop the mouse trails small ripples too), and a few ripples appear on their own.
+  - The hero is a live lake drawn on a canvas: Alps mirrored in wobbling water, sun glints, a drifting sailboat and birds.
   - Moving waves between sections, a scrolling values band and shimmering accent words.
   - Service cards fill with water on hover. On phones each card keeps a gentle water line.
   - Reveal-on-scroll sections and a pregnancy timeline that fills as you scroll.

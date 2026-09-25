@@ -152,11 +152,6 @@ em{font-style:italic;color:var(--accent)}
 .fc-2 .langs-mini{font:600 .82rem/1 var(--body);letter-spacing:.14em;color:var(--accent)}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,163,126,.5)}70%{box-shadow:0 0 0 10px rgba(47,163,126,0)}100%{box-shadow:0 0 0 0 rgba(47,163,126,0)}}
-.lake-hint{position:absolute;z-index:2;right:var(--gutter);bottom:calc(var(--band) * .22 + 30px);display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;font:500 .82rem/1 var(--body);letter-spacing:.04em;color:#fff;background:rgba(10,50,64,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:.7em 1em .7em .8em;border-radius:999px;transition:opacity .6s,transform .6s}
-.lake-hint .ring{width:14px;height:14px;border-radius:50%;border:1.5px solid #fff;position:relative}
-.lake-hint .ring::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:1.5px solid #fff;animation:hintring 2s ease-out infinite}
-@keyframes hintring{from{transform:scale(1);opacity:1}to{transform:scale(2.6);opacity:0}}
-.lake-hint.gone{opacity:0;transform:translateY(8px);pointer-events:none}
 .hero .wave{position:absolute;left:0;right:0;bottom:-1px;z-index:1}
 
 /* Waves between sections */
@@ -437,7 +432,6 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12p
   .chips{gap:8px;margin-top:22px}
   .chips li{font-size:.8rem;padding:.4em .75em}
   .hero-cta{margin-top:26px}
-  .lake-hint{bottom:70px}
   footer .top{grid-template-columns:1fr 1fr}
   footer .top>div:first-child{grid-column:1/-1}
   .portrait{max-width:340px;justify-self:center}
@@ -533,7 +527,6 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12p
       </div>
     </div>
   </div>
-  <button class="lake-hint" type="button" id="lake-hint"><span class="ring" aria-hidden="true"></span><span data-i18n="hero.hint">Berühren Sie den See</span></button>
   <div class="wave" style="--fill:var(--deep)" aria-hidden="true"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path class="w2" d="M0 30Q180 58 360 30T720 30T1080 30T1440 30T1800 30T2160 30T2520 30T2880 30V70H0Z"/><path class="w1" d="M0 38Q180 12 360 38T720 38T1080 38T1440 38T1800 38T2160 38T2520 38T2880 38V70H0Z"/></svg></div>
 </section>
 
@@ -1044,7 +1037,7 @@ de:{
  "cta.book":"Termin anfragen","cta.services":"Unsere Leistungen",
  "hero.eyebrow":"Gynäkologie in Bern","hero.l1":"Frauengesundheit,","hero.l2":"mit Zeit und","hero.l3":"<em>Zuwendung</em> begleitet.",
  "hero.lede":"Von der ersten Vorsorge über die Schwangerschaft bis in die Wechseljahre: Wir nehmen uns Zeit für Ihre Fragen und erklären jeden Schritt. Auf Deutsch, Französisch oder Englisch.",
- "hero.langs":"Sprechstunde in 3 Sprachen","hero.hint":"Berühren Sie den See","chip.kvg":"Grundversicherung (KVG)","chip.new":"Neue Patientinnen willkommen","chip.access":"Rollstuhlgängig",
+ "hero.langs":"Sprechstunde in 3 Sprachen","chip.kvg":"Grundversicherung (KVG)","chip.new":"Neue Patientinnen willkommen","chip.access":"Rollstuhlgängig",
  "v.1":"Zeit für Ihre Fragen","v.2":"Diskret & vertraulich","v.3":"Moderne Ultraschalldiagnostik","v.4":"Auf Augenhöhe","v.5":"In jeder Lebensphase",
  "s.eyebrow":"Leistungen","s.title":"Medizin für <em>jede</em> Lebensphase","s.lede":"Wir betreuen Mädchen und Frauen jeden Alters, von der ersten Konsultation bis zur Nachsorge. Die meisten Untersuchungen führen wir direkt in der Praxis durch.",
  "sv.1.t":"Jahreskontrolle & Vorsorge","sv.1.d":"Krebsvorsorge mit Zellabstrich (PAP) und HPV-Test, Brustuntersuchung und Beratung.","sv.1.k":"Prävention",
@@ -1095,7 +1088,7 @@ fr:{
  "cta.book":"Prendre rendez-vous","cta.services":"Nos prestations",
  "hero.eyebrow":"Gynécologie à Berne","hero.l1":"La santé des femmes,","hero.l2":"accompagnée avec","hero.l3":"temps et <em>bienveillance</em>.",
  "hero.lede":"Du premier contrôle à la ménopause, en passant par la grossesse : nous prenons le temps de répondre à vos questions et d’expliquer chaque étape. En français, en allemand ou en anglais.",
- "hero.langs":"Consultations en 3 langues","hero.hint":"Touchez le lac","chip.kvg":"Assurance de base (LAMal)","chip.new":"Nouvelles patientes bienvenues","chip.access":"Accès en fauteuil roulant",
+ "hero.langs":"Consultations en 3 langues","chip.kvg":"Assurance de base (LAMal)","chip.new":"Nouvelles patientes bienvenues","chip.access":"Accès en fauteuil roulant",
  "v.1":"Du temps pour vos questions","v.2":"Discrétion & confidentialité","v.3":"Échographie de pointe","v.4":"Une relation d’égal à égal","v.5":"À chaque étape de la vie",
  "s.eyebrow":"Prestations","s.title":"Une médecine pour <em>chaque</em> étape de la vie","s.lede":"Nous accompagnons les jeunes filles et les femmes de tout âge, de la première consultation au suivi. La plupart des examens se font directement au cabinet.",
  "sv.1.t":"Contrôle annuel & prévention","sv.1.d":"Dépistage du cancer par frottis (PAP) et test HPV, examen des seins et conseils.","sv.1.k":"Prévention",
@@ -1146,7 +1139,7 @@ en:{
  "cta.book":"Request appointment","cta.services":"Our services",
  "hero.eyebrow":"Gynaecology in Bern","hero.l1":"Women’s health,","hero.l2":"cared for with time","hero.l3":"and <em>attention</em>.",
  "hero.lede":"From your first check-up through pregnancy to menopause, we take time for your questions and explain every step. In English, German or French.",
- "hero.langs":"Consultations in 3 languages","hero.hint":"Touch the lake","chip.kvg":"Basic insurance (KVG)","chip.new":"New patients welcome","chip.access":"Wheelchair accessible",
+ "hero.langs":"Consultations in 3 languages","chip.kvg":"Basic insurance (KVG)","chip.new":"New patients welcome","chip.access":"Wheelchair accessible",
  "v.1":"Time for your questions","v.2":"Discreet & confidential","v.3":"State-of-the-art ultrasound","v.4":"Care as equals","v.5":"At every stage of life",
  "s.eyebrow":"Services","s.title":"Care for <em>every</em> stage of life","s.lede":"We care for girls and women of all ages, from the first consultation to follow-up. Most examinations take place right here in the practice.",
  "sv.1.t":"Annual check-up & screening","sv.1.d":"Cervical screening with Pap smear and HPV test, breast examination and advice.","sv.1.k":"Prevention",
@@ -1364,11 +1357,11 @@ form.addEventListener("submit", e=>{
 
 /* ---------- Hero: live lake (canvas) ---------- */
 const hero = document.getElementById("hero"), cv = document.getElementById("lake"), ctx = cv.getContext("2d");
-const heroInner = hero.querySelector(".hero-inner"), hint = document.getElementById("lake-hint");
+const heroInner = hero.querySelector(".hero-inner");
 const bg = document.createElement("canvas"), bgx = bg.getContext("2d");
 const refl = document.createElement("canvas"), rx = refl.getContext("2d");
-let W=0, H=0, DPR=1, horizon=0, bandTop=0, C={}, ridges=[], glints=[], ripples=[], birds=[], waterGrad=null;
-let running=false, visible=true, last=0, nextAuto=0, lastMove=0;
+let W=0, H=0, DPR=1, horizon=0, bandTop=0, C={}, ridges=[], glints=[], birds=[], waterGrad=null;
+let running=false, visible=true, last=0;
 const boat = {x:0.18, speed:9};
 
 function rng(seed){ return ()=>{ seed=(seed*16807)%2147483647; return (seed-1)/2147483646; }; }
@@ -1444,7 +1437,6 @@ function build(){
     glints.push({ x: nearSun ? sx + (r2()-.5)*spread*2 : r2()*W, y, len: 4+r2()*14*(0.4+(y-horizon)/(H-horizon)), ph:r2()*6.28, sp:.8+r2()*2.2 });
   }
   birds = W>820 ? [0,1,2].map(i=>({x:W*(.6+r2()*.35), y: horizon-mh-40-r2()*70, s: 5+r2()*4, v: 9+r2()*7, ph:r2()*6})) : [];
-  if (hint) hint.style.bottom = Math.max(24,(H-horizon)*0.45) + "px";
   if (!running || reduce) frame(performance.now(), true);
 }
 function frame(now, once){
@@ -1491,38 +1483,10 @@ function frame(now, once){
     const f = Math.sin(t*6 + b.ph)*b.s*0.45, y = b.y + Math.sin(t*.8+b.ph)*4;
     ctx.beginPath(); ctx.moveTo(b.x-b.s, y-f); ctx.quadraticCurveTo(b.x-b.s*.4, y-2, b.x, y); ctx.quadraticCurveTo(b.x+b.s*.4, y-2, b.x+b.s, y-f); ctx.stroke();
   }
-  // ripples
-  if (!once && now > nextAuto){ addRipple(Math.random()*W, horizon + depth*(0.25+Math.random()*0.6), .6); nextAuto = now + 1800 + Math.random()*2200; }
-  ctx.lineWidth = 1.5;
-  ripples = ripples.filter(r=>t - r.t0 < 2.8);
-  for (const r of ripples){
-    const age = t - r.t0, persp = 0.22 + (r.y-horizon)/depth*0.2;
-    for (let k=0;k<3;k++){
-      const rad = (age - k*0.22) * 70 * r.s * (0.5 + (r.y-horizon)/depth);
-      if (rad <= 0) continue;
-      ctx.globalAlpha = Math.max(0, (1 - age/2.8)) * (C.dark?.45:.75) * (1 - k*0.25);
-      ctx.strokeStyle = C.glint;
-      ctx.beginPath(); ctx.ellipse(r.x, r.y, rad, rad*persp, 0, 0, Math.PI*2); ctx.stroke();
-    }
-  }
-  ctx.globalAlpha = 1;
   if (!once && running) requestAnimationFrame(frame);
 }
-function addRipple(x,y,s){ ripples.push({x,y,s:s||1,t0:performance.now()/1000}); if (ripples.length>24) ripples.shift(); }
 function start(){ if (running || reduce || !visible) return; running = true; last = performance.now(); requestAnimationFrame(frame); }
 function stop(){ running = false; }
-function local(e){ const r = hero.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
-function dismissHint(){ if (hint) hint.classList.add("gone"); }
-hero.addEventListener("pointerdown", e=>{
-  const [x,y] = local(e);
-  if (y > horizon + 4){ addRipple(x,y,1.1); dismissHint(); if (!running) frame(performance.now(), true); }
-});
-hero.addEventListener("pointermove", e=>{
-  if (e.pointerType !== "mouse") return;
-  const now = performance.now(); if (now - lastMove < 140) return;
-  const [x,y] = local(e); if (y > horizon + 4){ lastMove = now; addRipple(x,y,.45); }
-});
-hint.addEventListener("click", e=>{ e.stopPropagation(); addRipple(W*0.5, horizon+(H-horizon)*0.5, 1.3); setTimeout(()=>addRipple(W*0.5+40, horizon+(H-horizon)*0.55, .8), 250); dismissHint(); });
 let rb = 0;
 function rebuild(){ cancelAnimationFrame(rb); rb = requestAnimationFrame(build); }
 if ("ResizeObserver" in window) new ResizeObserver(rebuild).observe(hero); else window.addEventListener("resize", rebuild);
