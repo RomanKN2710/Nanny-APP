@@ -160,7 +160,7 @@ em{font-style:italic;color:var(--accent)}
 .hero .wave{position:absolute;left:0;right:0;bottom:-1px;z-index:1}
 
 /* Waves between sections */
-.wave{display:block;height:clamp(34px,5vw,68px);background:var(--bg,transparent);overflow:hidden;line-height:0;pointer-events:none}
+.wave{display:block;margin-bottom:-1px;position:relative;z-index:1;height:clamp(34px,5vw,68px);background:var(--bg,transparent);overflow:hidden;line-height:0;pointer-events:none}
 .wave svg{width:100%;height:100%;display:block}
 .wave path{fill:var(--fill)}
 .wave .w1{animation:wavemove 16s linear infinite}
@@ -373,6 +373,31 @@ section{padding-block:clamp(64px,9vw,120px)}
 .faq-list .ans{overflow:hidden;color:var(--ink-2);max-width:68ch}
 .faq-list .ans p{padding-bottom:24px}
 
+/* Photo band: "Durchatmen" */
+.breathe{position:relative;padding:0;height:clamp(380px,58vw,660px);overflow:hidden;display:grid;place-items:center;text-align:center;color:#fff;background:var(--deep-2);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 18'%3E%3Cpath d='M0 9Q50 0 100 9T200 9V18H0Z'/%3E%3C/svg%3E") 0 0/200px 18px repeat-x,linear-gradient(#000 0 0) 0 17px/100% calc(100% - 34px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 18'%3E%3Cpath d='M0 9Q50 18 100 9T200 9V0H0Z'/%3E%3C/svg%3E") 0 100%/200px 18px repeat-x;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 18'%3E%3Cpath d='M0 9Q50 0 100 9T200 9V18H0Z'/%3E%3C/svg%3E") 0 0/200px 18px repeat-x,linear-gradient(#000 0 0) 0 17px/100% calc(100% - 34px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 18'%3E%3Cpath d='M0 9Q50 18 100 9T200 9V0H0Z'/%3E%3C/svg%3E") 0 100%/200px 18px repeat-x;animation:bandwave 6s linear infinite}
+@keyframes bandwave{to{-webkit-mask-position:200px 0,0 17px,-200px 100%;mask-position:200px 0,0 17px,-200px 100%}}
+.breathe-img{position:absolute;left:0;top:-12%;width:100%;height:124%;object-fit:cover;object-position:50% 45%;will-change:transform;filter:brightness(1.12) saturate(1.2) contrast(1.02)}
+.breathe::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(6,38,50,.42),rgba(6,38,50,.12) 70%)}
+.breathe-inner{position:relative;z-index:1;display:grid;justify-items:center;gap:18px}
+.breathe-title{font:300 clamp(3.2rem,11vw,8.5rem)/1 var(--display);letter-spacing:-.02em;overflow:hidden;padding-bottom:.08em;text-shadow:0 4px 30px rgba(0,30,40,.35)}
+.breathe-title .ch{display:inline-block;white-space:pre}
+.breathe.anim .breathe-title .ch{transform:translateY(110%);opacity:0;transition:transform 1s cubic-bezier(.2,.8,.2,1),opacity 1s;transition-delay:calc(var(--i) * 55ms)}
+.breathe.anim.in .breathe-title .ch{transform:none;opacity:1}
+.breathe p{max-width:34ch;font-size:clamp(1.05rem,1.8vw,1.3rem);text-shadow:0 2px 16px rgba(0,30,40,.5)}
+.breathe.anim p{opacity:0;transform:translateY(14px);transition:opacity 1s .6s,transform 1s .6s}
+.breathe.anim.in p{opacity:1;transform:none}
+
+/* Footer: evening lake */
+footer{position:relative;overflow:hidden;padding-top:clamp(150px,24vw,320px)!important}
+.dusk{position:absolute;inset:0;z-index:0}
+.dusk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;opacity:0;animation:dusk 27s linear infinite}
+.dusk img:nth-child(2){animation-delay:9s;object-position:50% 62%}
+.dusk img:nth-child(3){animation-delay:18s;object-position:50% 60%}
+@keyframes dusk{0%{opacity:0;transform:scale(1.12)}5%{opacity:1}33%{opacity:1}38%{opacity:0;transform:scale(1.02)}100%{opacity:0;transform:scale(1.02)}}
+.dusk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--footer) 0%,color-mix(in srgb,var(--footer) 15%,transparent) 20%,color-mix(in srgb,var(--footer) 30%,transparent) 45%,color-mix(in srgb,var(--footer) 90%,transparent) 72%,var(--footer) 100%)}
+footer .wrap{position:relative;z-index:1}
+footer .big{text-shadow:0 3px 24px rgba(0,20,30,.55)}
+
 /* Footer */
 footer{background:var(--footer);color:#EAF4F7;padding-block:40px 40px}
 footer .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12)}
@@ -436,6 +461,9 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12p
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .scene{transition:none}
   .marquee{animation:none}
+  .dusk img{animation:none}
+  .dusk img:first-child{opacity:1}
+  .breathe{animation:none}
 }
 </style>
 </head>
@@ -580,6 +608,13 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12p
   </div>
 </section>
 
+<section class="breathe" id="durchatmen" aria-labelledby="breathe-t">
+  <img class="breathe-img" src="photos/see-tag-l.jpg" srcset="photos/see-tag-s.jpg 1000w, photos/see-tag-l.jpg 2000w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  <div class="wrap breathe-inner">
+    <h2 class="breathe-title" id="breathe-t" data-i18n="b.l1">Durchatmen.</h2>
+    <p data-i18n="b.sub">Bei uns haben Sie Zeit für Ihre Fragen, Ihre Sorgen und für sich selbst.</p>
+  </div>
+</section>
 <div class="wave" style="--bg:var(--porcelain);--fill:var(--mist)" aria-hidden="true"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path class="w2" d="M0 30Q180 58 360 30T720 30T1080 30T1440 30T1800 30T2160 30T2520 30T2880 30V70H0Z"/><path class="w1" d="M0 38Q180 12 360 38T720 38T1080 38T1440 38T1800 38T2160 38T2520 38T2880 38V70H0Z"/></svg></div>
 <section class="pregnancy" id="schwangerschaft">
   <div class="wrap">
@@ -973,6 +1008,11 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12p
 
 <div class="wave" style="--bg:var(--porcelain);--fill:var(--footer)" aria-hidden="true"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path class="w2" d="M0 30Q180 58 360 30T720 30T1080 30T1440 30T1800 30T2160 30T2520 30T2880 30V70H0Z"/><path class="w1" d="M0 38Q180 12 360 38T720 38T1080 38T1440 38T1800 38T2160 38T2520 38T2880 38V70H0Z"/></svg></div>
 <footer>
+  <div class="dusk" aria-hidden="true">
+    <img src="photos/see-abend-1-l.jpg" srcset="photos/see-abend-1-s.jpg 1000w, photos/see-abend-1-l.jpg 2000w" sizes="100vw" alt="" loading="lazy" decoding="async">
+    <img src="photos/see-abend-2-l.jpg" srcset="photos/see-abend-2-s.jpg 1000w, photos/see-abend-2-l.jpg 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
+    <img src="photos/see-abend-3-l.jpg" srcset="photos/see-abend-3-s.jpg 1000w, photos/see-abend-3-l.jpg 2000w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  </div>
   <div class="wrap">
     <div class="top">
       <div><p class="big" data-i18n="ft.big">Wir freuen uns auf <em>Ihren Besuch.</em></p></div>
@@ -994,6 +1034,7 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12p
 /* ---------- Translations ---------- */
 const T = {
 de:{
+ "b.l1":"Durchatmen.","b.sub":"Bei uns haben Sie Zeit für Ihre Fragen, Ihre Sorgen und für sich selbst.",
  "t.eyebrow":"Einblicke","t.title":"Ein Rundgang durch <em>die Praxis</em>","t.lede":"Helle Räume, kurze Wege und viel Ruhe. So sieht Ihr Besuch bei uns aus.",
  "t.1.n":"Empfang","t.1.d":"Unser Team begrüsst Sie, nimmt Ihre Versichertenkarte entgegen und beantwortet erste Fragen.",
  "t.2.n":"Wartezimmer","t.2.d":"Ein ruhiger Raum mit Tageslicht, Tee und Wasser. Meist warten Sie hier nur wenige Minuten.",
@@ -1044,6 +1085,7 @@ de:{
  "ft.big":"Wir freuen uns auf <em>Ihren Besuch.</em>","ft.practice":"Praxis","ft.legal":"Rechtliches","ft.imprint":"Impressum","ft.privacy":"Datenschutz","ft.member":"Mitglied FMH · gynécologie suisse"
 },
 fr:{
+ "b.l1":"Respirer.","b.sub":"Chez nous, vous avez du temps pour vos questions, vos inquiétudes et pour vous-même.",
  "t.eyebrow":"Aperçu","t.title":"Une visite <em>du cabinet</em>","t.lede":"Des pièces lumineuses, des trajets courts et beaucoup de calme. Voici comment se déroule votre visite.",
  "t.1.n":"Accueil","t.1.d":"Notre équipe vous accueille, prend votre carte d’assurance et répond à vos premières questions.",
  "t.2.n":"Salle d’attente","t.2.d":"Un espace calme et lumineux, avec thé et eau. L’attente est généralement de quelques minutes.",
@@ -1094,6 +1136,7 @@ fr:{
  "ft.big":"Au plaisir de <em>vous accueillir.</em>","ft.practice":"Cabinet","ft.legal":"Mentions légales","ft.imprint":"Impressum","ft.privacy":"Protection des données","ft.member":"Membre FMH · gynécologie suisse"
 },
 en:{
+ "b.l1":"Breathe.","b.sub":"With us you have time for your questions, your worries and for yourself.",
  "t.eyebrow":"A look inside","t.title":"A walk through <em>the practice</em>","t.lede":"Bright rooms, short distances and plenty of calm. This is what your visit looks like.",
  "t.1.n":"Reception","t.1.d":"Our team welcomes you, takes your insurance card and answers your first questions.",
  "t.2.n":"Waiting room","t.2.d":"A quiet, daylit room with tea and water. Most waits are only a few minutes.",
@@ -1171,6 +1214,8 @@ function applyLang(l){
   const clone = mq.parentNode.querySelector("[data-clone]"); if (clone) clone.remove();
   const c = mq.cloneNode(true); c.removeAttribute("data-marquee"); c.setAttribute("data-clone",""); mq.parentNode.appendChild(c);
   renderHours();
+  const bt = document.getElementById("breathe-t");
+  bt.innerHTML = [...bt.textContent].map((c,i)=>'<span class="ch" style="--i:'+i+'">'+c+'</span>').join("");
   store.set("lumen-lang", lang);
 }
 
@@ -1212,8 +1257,16 @@ document.getElementById("year").textContent = new Date().getFullYear();
 /* ---------- Header, menu, mobile CTA ---------- */
 const header = document.querySelector(".header"), cta = document.getElementById("mobile-cta");
 const burger = document.querySelector(".burger"), menu = document.getElementById("mobile-menu");
+const band = document.getElementById("durchatmen"), bandImg = band.querySelector(".breathe-img");
+function parallax(){
+  const r = band.getBoundingClientRect(), vh = window.innerHeight;
+  if (r.bottom < 0 || r.top > vh) return;
+  const p = (r.top + r.height/2 - vh/2) / (vh + r.height);
+  bandImg.style.transform = "translate3d(0," + (p * -18).toFixed(2) + "%,0) scale(1.04)";
+}
 function onScroll(){
   const y = window.scrollY;
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) parallax();
   header.classList.toggle("scrolled", y>20);
   cta.classList.toggle("show", y>500);
   updateJourney();
@@ -1286,6 +1339,13 @@ function tick(){
   document.getElementById("clock-m").setAttribute("transform","rotate("+(m*6)+" 690 124)");
 }
 tick(); setInterval(tick, 30000);
+
+/* ---------- Photo band reveal ---------- */
+if ("IntersectionObserver" in window && !reduce){
+  band.classList.add("anim");
+  const bio = new IntersectionObserver(es=>es.forEach(e=>{ if (e.isIntersecting){ band.classList.add("in"); bio.disconnect(); } }), {threshold:.35});
+  bio.observe(band);
+}
 
 /* ---------- FAQ: one open at a time ---------- */
 const dets = document.querySelectorAll(".faq-list details");

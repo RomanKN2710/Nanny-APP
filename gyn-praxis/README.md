@@ -38,7 +38,16 @@ The form validates input and shows a thank-you screen, but it does not send anyt
 
 Any static host works: Vercel, Netlify, Cloudflare Pages or GitHub Pages. Upload the `gyn-praxis` folder.
 
-## Practice tour and photos
+## Lake photos
+
+The photos in `photos/` are the practice's own lake pictures. They were resized for the web, and all metadata, including GPS location, was removed.
+
+- `see-tag-*`: the "Durchatmen / Respirer / Breathe" photo band after the services. It moves slower than the page as you scroll (parallax), has wavy animated edges, and the title letters rise in when the band comes into view.
+- `see-abend-1..3-*`: three sunsets that cross-fade slowly with a gentle zoom behind the footer.
+
+Each photo comes in a 1000 px (`-s`) and a full (`-l`) version. The browser picks the right size.
+
+## Practice tour and room photos
 
 The "A look inside" section shows four illustrated, animated rooms (reception, waiting room, consultation room, examination room). They change automatically every 7 seconds and pause on hover. The waiting-room clock shows the real time.
 
