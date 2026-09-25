@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Praxis Lumen</title>
+<meta name="description" content="Praxis Lumen – Frauenheilkunde und Geburtshilfe. Sprechstunde auf Deutsch, Französisch und Englisch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+:root{
+  --porcelain:#F5F7F4;
+  --surface:#FFFFFF;
+  --mist:#E3ECE7;
+  --blush:#F3DFD8;
+  --eucalyptus:#1F4640;
+  --eucalyptus-2:#2C5E55;
+  --berry:#A13F5C;
+  --berry-soft:#C9748B;
+  --ink:#1B2724;
+  --ink-2:#4A5A56;
+  --line:#D3DDD8;
+  --on-dark:#F3F6F4;
+  --shadow:0 20px 50px -24px rgba(31,70,64,.35);
+  --display:"Fraunces", "Iowan Old Style", Georgia, serif;
+  --body:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius:18px;
+  --gutter:clamp(16px, 4vw, 40px);
+  --max:1180px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --porcelain:#111A18; --surface:#18231F; --mist:#1E2D29; --blush:#3A2429;
+    --eucalyptus:#A9D2C6; --eucalyptus-2:#7FB5A6; --berry:#E48DA5; --berry-soft:#B85F79;
+    --ink:#E9EFEC; --ink-2:#A7B7B2; --line:#2C3D38; --on-dark:#111A18;
+    --shadow:0 20px 50px -24px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --porcelain:#111A18; --surface:#18231F; --mist:#1E2D29; --blush:#3A2429;
+  --eucalyptus:#A9D2C6; --eucalyptus-2:#7FB5A6; --berry:#E48DA5; --berry-soft:#B85F79;
+  --ink:#E9EFEC; --ink-2:#A7B7B2; --line:#2C3D38; --on-dark:#111A18;
+  --shadow:0 20px 50px -24px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--porcelain);color:var(--ink);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2.6rem,6.4vw,5.1rem)}
+h2{font-size:clamp(2rem,4.2vw,3.2rem)}
+h3{font-size:1.35rem;line-height:1.2}
+p{margin:0}
+em{font-style:italic;color:var(--berry)}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gutter)}
+.eyebrow{font:600 .78rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--eucalyptus-2);display:inline-flex;align-items:center;gap:.6em}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
+.lede{font-size:1.15rem;color:var(--ink-2);max-width:58ch}
+:focus-visible{outline:2px solid var(--berry);outline-offset:3px;border-radius:6px}
+
+/* Buttons */
+.btn{--bg:var(--eucalyptus);--fg:var(--porcelain);display:inline-flex;align-items:center;gap:.6em;padding:.95em 1.5em;border-radius:999px;border:0;background:var(--bg);color:var(--fg);font:600 .98rem/1 var(--body);text-decoration:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.btn::after{content:"";position:absolute;inset:0;background:var(--berry);transform:translateY(101%);transition:transform .45s cubic-bezier(.2,.8,.2,1);z-index:0}
+.btn>*{position:relative;z-index:1}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn:hover::after{transform:none}
+.btn .arrow{transition:transform .35s}
+.btn:hover .arrow{transform:translateX(4px)}
+.btn.ghost{--bg:transparent;--fg:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.ghost::after{background:var(--mist)}
+
+/* Header */
+.header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;transition:background .4s,box-shadow .4s,backdrop-filter .4s}
+.header.scrolled{background:color-mix(in srgb,var(--porcelain) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.header .wrap{display:flex;align-items:center;gap:24px;height:78px;transition:height .4s}
+.header.scrolled .wrap{height:64px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
+.brand svg{width:34px;height:40px;flex:none}
+.brand b{font:500 1.35rem/1 var(--display);display:block}
+.brand small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-top:4px}
+.nav{display:flex;gap:22px;white-space:nowrap}
+.nav a{text-decoration:none;font-weight:500;font-size:.95rem;position:relative;padding-block:6px}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--berry);transform:scaleX(0);transform-origin:right;transition:transform .35s}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.langs{display:flex;background:var(--mist);border-radius:999px;padding:3px}
+.langs button{border:0;background:transparent;color:var(--ink-2);font:600 .78rem/1 var(--body);letter-spacing:.08em;padding:.6em .8em;border-radius:999px;cursor:pointer;transition:background .3s,color .3s}
+.langs button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 2px 8px -3px rgba(0,0,0,.2)}
+.header .btn{padding:.8em 1.2em;font-size:.9rem;white-space:nowrap}
+.burger{display:none;width:44px;height:44px;border:0;background:var(--mist);border-radius:50%;cursor:pointer;position:relative}
+.burger span{position:absolute;left:13px;right:13px;height:1.5px;background:var(--ink);transition:transform .35s,opacity .3s}
+.burger span:nth-child(1){top:17px}.burger span:nth-child(2){top:26px}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(4.5px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){transform:translateY(-4.5px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;z-index:40;background:var(--porcelain);padding:110px var(--gutter) 40px;display:flex;flex-direction:column;gap:8px;clip-path:circle(0 at calc(100% - 44px) 40px);transition:clip-path .6s cubic-bezier(.7,0,.2,1);visibility:hidden}
+.mobile-menu.open{clip-path:circle(150% at calc(100% - 44px) 40px);visibility:visible}
+.mobile-menu a{font:400 2.2rem/1.3 var(--display);text-decoration:none;border-bottom:1px solid var(--line);padding-block:10px}
+.mobile-menu .btn{margin-top:24px;align-self:flex-start}
+
+/* Hero */
+.hero{position:relative;padding-block:clamp(32px,6vw,80px) clamp(56px,8vw,110px)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,72px);align-items:center}
+.hero h1{margin-block:22px 24px}
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.08em}
+.hero h1 .line>span{display:inline-block;animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
+.hero h1 .line:nth-child(2)>span{animation-delay:.12s}
+.hero h1 .line:nth-child(3)>span{animation-delay:.24s}
+.hero .fade{animation:fadeUp 1s .45s cubic-bezier(.2,.8,.2,1) both}
+.hero .fade.d2{animation-delay:.6s}
+.hero .fade.d3{animation-delay:.75s}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px;padding:0;list-style:none}
+.chips li{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--ink-2);padding:.5em .9em;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.chips svg{width:16px;height:16px;color:var(--eucalyptus-2)}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.arch-stage{position:relative;aspect-ratio:4/5;max-width:470px;width:100%;justify-self:center;animation:fadeUp 1.2s .2s cubic-bezier(.2,.8,.2,1) both}
+.arch{position:absolute;inset:0;border-radius:999px 999px 26px 26px;overflow:hidden;background:
+  radial-gradient(120% 80% at 30% 15%, color-mix(in srgb,var(--blush) 90%,transparent), transparent 60%),
+  linear-gradient(170deg,var(--eucalyptus-2),var(--eucalyptus) 70%);box-shadow:var(--shadow)}
+.arch canvas{position:absolute;inset:0;width:100%;height:100%}
+.arch .botanic{position:absolute;left:50%;bottom:0;width:78%;transform:translateX(-50%);color:var(--porcelain);opacity:.9}
+.botanic path{fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-dasharray:var(--len,600);stroke-dashoffset:var(--len,600);animation:draw 3.2s .5s cubic-bezier(.45,0,.2,1) forwards}
+.botanic path.leaf{animation-delay:1.3s}
+.botanic path.leaf.l2{animation-delay:1.6s}.botanic path.leaf.l3{animation-delay:1.9s}.botanic path.leaf.l4{animation-delay:2.2s}
+.botanic circle{fill:var(--blush);transform-origin:center;transform-box:fill-box;animation:bloom 1.4s 2.6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes bloom{from{transform:scale(0)}to{transform:scale(1)}}
+.arch-ring{position:absolute;inset:-18px;border-radius:999px 999px 36px 36px;border:1px solid var(--line);pointer-events:none}
+.float-card{position:absolute;background:var(--surface);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow);font-size:.88rem;display:flex;align-items:center;gap:12px;animation:bob 6s ease-in-out infinite}
+.float-card b{display:block;font-weight:600;color:var(--ink)}
+.float-card span{color:var(--ink-2)}
+.float-card .dot{width:10px;height:10px;border-radius:50%;background:#3FA37A;box-shadow:0 0 0 0 rgba(63,163,122,.5);animation:pulse 2s infinite;flex:none}
+.float-card .dot.closed{background:var(--berry-soft);animation:none}
+.fc-1{left:-28px;bottom:16%}
+.fc-2{right:-20px;top:14%;animation-delay:-3s}
+.fc-2 .langs-mini{font:600 .82rem/1 var(--body);letter-spacing:.14em;color:var(--berry)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(63,163,122,0)}100%{box-shadow:0 0 0 0 rgba(63,163,122,0)}}
+
+/* Sections */
+section{padding-block:clamp(64px,9vw,120px)}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:24px 64px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.sec-head h2{margin-top:16px}
+
+/* Values band */
+.values{background:var(--eucalyptus);color:var(--on-dark);padding-block:0;overflow:hidden}
+.marquee{display:flex;width:max-content;animation:marquee 38s linear infinite}
+.marquee ul{display:flex;list-style:none;margin:0;padding:26px 0;gap:0}
+.marquee li{font:italic 300 clamp(1.4rem,2.6vw,2rem)/1 var(--display);white-space:nowrap;display:flex;align-items:center}
+.marquee li::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--berry-soft);margin-inline:36px}
+.values:hover .marquee{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* Services */
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.service{background:var(--surface);padding:30px 26px 32px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;transition:background .4s}
+.service::before{content:"";position:absolute;left:0;right:0;bottom:0;height:0;background:var(--blush);transition:height .5s cubic-bezier(.2,.8,.2,1);z-index:0}
+.service>*{position:relative;z-index:1}
+.service:hover::before{height:100%}
+.service .ico{width:48px;height:48px;border-radius:50%;background:var(--mist);display:grid;place-items:center;color:var(--eucalyptus);transition:transform .5s cubic-bezier(.2,.8,.2,1),background .4s}
+.service:hover .ico{transform:rotate(-12deg) scale(1.08);background:var(--surface)}
+.service .ico svg{width:24px;height:24px}
+.service p{color:var(--ink-2);font-size:.95rem;line-height:1.55}
+.service .tag{margin-top:auto;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--berry)}
+
+/* Pregnancy */
+.pregnancy{background:var(--mist)}
+.journey{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:18px;padding-top:70px}
+.journey .track{position:absolute;top:22px;left:0;right:0;height:2px;background:var(--line);border-radius:2px}
+.journey .track i{position:absolute;inset:0;background:linear-gradient(90deg,var(--eucalyptus-2),var(--berry));transform-origin:left;transform:scaleX(var(--p,0));border-radius:2px;transition:transform .15s linear}
+.stop{position:relative}
+.stop::before{content:"";position:absolute;top:-56px;left:0;width:16px;height:16px;border-radius:50%;background:var(--porcelain);border:2px solid var(--eucalyptus-2);transition:background .4s,transform .4s}
+.stop.on::before{background:var(--berry);border-color:var(--berry);transform:scale(1.2)}
+.stop .wk{font:500 2rem/1 var(--display);color:var(--eucalyptus);font-variant-numeric:tabular-nums}
+.stop .wk small{font:600 .7rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;display:block;color:var(--ink-2);margin-bottom:8px}
+.stop h3{font-size:1.1rem;margin-block:12px 8px}
+.stop p{font-size:.9rem;color:var(--ink-2);line-height:1.5}
+.note{margin-top:48px;display:flex;gap:14px;align-items:flex-start;padding:18px 22px;background:var(--surface);border-radius:14px;font-size:.93rem;color:var(--ink-2);max-width:780px}
+.note svg{flex:none;width:22px;height:22px;color:var(--eucalyptus-2);margin-top:2px}
+
+/* About */
+.about .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,90px);align-items:center}
+.portrait{position:relative;aspect-ratio:4/5;border-radius:26px 26px 999px 999px;background:linear-gradient(200deg,var(--blush),color-mix(in srgb,var(--berry-soft) 60%,var(--blush)));overflow:hidden;max-width:440px;width:100%}
+.portrait svg{position:absolute;inset:auto 0 0 0;width:100%;color:var(--eucalyptus)}
+.portrait .ph{position:absolute;top:28px;left:0;right:0;text-align:center;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--eucalyptus);opacity:.7}
+.about blockquote{font:italic 300 clamp(1.5rem,2.6vw,2.05rem)/1.3 var(--display);margin:26px 0 24px;color:var(--ink)}
+.about blockquote::before{content:"\201C";display:block;font-size:4rem;line-height:.6;color:var(--berry-soft);margin-bottom:10px}
+.cv{list-style:none;padding:0;margin:30px 0 0;display:grid;gap:0;border-top:1px solid var(--line)}
+.cv li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding-block:14px;border-bottom:1px solid var(--line);font-size:.95rem}
+.cv li b{font-weight:600;color:var(--eucalyptus-2);font-variant-numeric:tabular-nums}
+.sig{margin-top:26px;font:italic 400 1.6rem/1 var(--display);color:var(--eucalyptus)}
+
+/* Hours & Contact */
+.visit .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.panel{background:var(--surface);border-radius:var(--radius);padding:clamp(24px,3.5vw,40px);border:1px solid var(--line)}
+.status{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:.9rem;padding:.45em .9em;border-radius:999px;background:var(--mist);margin-bottom:20px}
+.status .dot{width:9px;height:9px;border-radius:50%;background:#3FA37A;animation:pulse 2s infinite}
+.status.closed .dot{background:var(--berry-soft);animation:none}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hours td{padding:12px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right;color:var(--ink-2)}
+.hours tr.today td{color:var(--berry);font-weight:600}
+.hours tr.today td:first-child::after{content:" ●";font-size:.6em;vertical-align:middle}
+.contact-list{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:18px}
+.contact-list li{display:flex;gap:14px;align-items:flex-start}
+.contact-list svg{flex:none;width:22px;height:22px;color:var(--eucalyptus-2);margin-top:3px}
+.contact-list small{display:block;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.contact-list a{text-decoration:none;font-weight:500}
+.emergency{margin-top:26px;padding:16px 18px;border-radius:12px;background:var(--blush);font-size:.92rem;display:flex;gap:12px;align-items:center}
+.emergency strong{font:500 1.6rem/1 var(--display);color:var(--berry)}
+
+/* Form */
+.form-panel{background:var(--eucalyptus);color:var(--on-dark);border:0}
+.form-panel h3{font-size:1.8rem;margin-bottom:8px}
+.form-panel .sub{opacity:.8;margin-bottom:26px;font-size:.95rem}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.field input,.field select,.field textarea{font:inherit;font-size:1rem;color:var(--on-dark);background:color-mix(in srgb,var(--on-dark) 8%,transparent);border:1px solid color-mix(in srgb,var(--on-dark) 25%,transparent);border-radius:12px;padding:.8em .95em;transition:border-color .3s,background .3s;width:100%}
+.field select option{color:#1B2724;background:#fff}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--berry-soft);background:color-mix(in srgb,var(--on-dark) 14%,transparent)}
+.field input::placeholder,.field textarea::placeholder{color:color-mix(in srgb,var(--on-dark) 55%,transparent)}
+.consent{grid-column:1/-1;display:flex;gap:10px;font-size:.85rem;opacity:.9;align-items:flex-start}
+.consent input{margin-top:4px;accent-color:var(--berry-soft)}
+.form .btn{--bg:var(--porcelain);--fg:var(--eucalyptus);grid-column:1/-1;justify-self:start;margin-top:6px}
+.form .btn::after{background:var(--blush)}
+.success{text-align:center;padding-block:40px}
+.success svg{width:64px;height:64px;color:var(--berry-soft)}
+.success svg path{stroke-dasharray:60;stroke-dashoffset:60;animation:draw .9s .2s forwards}
+.success h3{margin-block:16px 10px}
+.success p{opacity:.85}
+
+/* FAQ */
+.faq-list{max-width:860px;border-top:1px solid var(--line)}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:24px;font:400 1.3rem/1.3 var(--display)}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary .pm{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);position:relative;transition:transform .4s,background .3s}
+.faq-list summary .pm::before,.faq-list summary .pm::after{content:"";position:absolute;left:10px;right:10px;top:50%;height:1.5px;background:var(--ink);transform:translateY(-50%)}
+.faq-list summary .pm::after{transform:translateY(-50%) rotate(90deg);transition:transform .4s}
+.faq-list details[open] .pm{background:var(--mist);transform:rotate(180deg)}
+.faq-list details[open] .pm::after{transform:translateY(-50%) rotate(0)}
+.faq-list .ans{overflow:hidden;color:var(--ink-2);max-width:68ch}
+.faq-list .ans p{padding-bottom:24px}
+
+/* Footer */
+footer{background:var(--ink);color:var(--porcelain);padding-block:64px 40px}
+:root[data-theme="dark"] footer{background:#0B1210}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) footer{background:#0B1210}}
+footer .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12)}
+footer .big{font:300 clamp(2rem,4vw,3rem)/1.1 var(--display)}
+footer .big em{color:var(--berry-soft)}
+footer h4{font:600 .75rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin:0 0 16px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:.95rem}
+footer a{text-decoration:none;opacity:.85}
+footer a:hover{opacity:1;text-decoration:underline}
+footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;font-size:.82rem;opacity:.6}
+
+/* Reveal on scroll (only applied by JS to elements below the fold) */
+.reveal-pending{opacity:0;transform:translateY(28px)}
+.reveal-in{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+
+/* Mobile CTA bar */
+.mobile-cta{display:none}
+
+/* Responsive */
+@media (max-width:1180px){
+  .nav{display:none}
+  .burger{display:block}
+}
+@media (max-width:1020px){
+  .header .btn.head-cta{display:none}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .journey{grid-template-columns:repeat(3,1fr);row-gap:56px}
+  .journey .track{display:none}
+  .stop::before{top:-28px}
+  .journey{padding-top:30px}
+}
+@media (max-width:820px){
+  .hero .wrap,.about .wrap,.visit .grid,.sec-head{grid-template-columns:1fr}
+  .arch-stage{max-width:360px;margin-top:10px}
+  .fc-1{left:-8px}.fc-2{right:-8px}
+  footer .top{grid-template-columns:1fr 1fr}
+  footer .top>div:first-child{grid-column:1/-1}
+  .portrait{max-width:340px;justify-self:center}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .langs button{padding:.55em .6em}
+  .brand small{display:none}
+  .header .wrap{gap:12px}
+  .services-grid{grid-template-columns:1fr}
+  .journey{grid-template-columns:1fr 1fr;column-gap:20px}
+  .form{grid-template-columns:1fr}
+  .cv li{grid-template-columns:90px 1fr}
+  .mobile-cta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;gap:8px;transform:translateY(160%);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+  .mobile-cta.show{transform:none}
+  .mobile-cta .btn{flex:1;justify-content:center;box-shadow:var(--shadow)}
+  .mobile-cta .btn.ghost{--bg:var(--surface);flex:0 0 auto}
+  footer{padding-bottom:100px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .botanic path{stroke-dashoffset:0}
+  .marquee{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="header" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Praxis Lumen">
+      <svg viewBox="0 0 34 40" aria-hidden="true"><path d="M2 39V17a15 15 0 0 1 30 0v22" fill="none" stroke="var(--eucalyptus)" stroke-width="2"/><path d="M17 39V20c0-5 3-8 7-9M17 27c-2-4-6-5-9-4" fill="none" stroke="var(--berry)" stroke-width="2" stroke-linecap="round"/></svg>
+      <span><b>Praxis Lumen</b><small data-i18n="brand.sub">Frauenheilkunde &amp; Geburtshilfe</small></span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#leistungen" data-i18n="nav.services">Leistungen</a>
+      <a href="#schwangerschaft" data-i18n="nav.pregnancy">Schwangerschaft</a>
+      <a href="#praxis" data-i18n="nav.about">Über uns</a>
+      <a href="#besuch" data-i18n="nav.visit">Sprechzeiten</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <div class="langs" role="group" aria-label="Sprache / Langue / Language">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn head-cta" href="#termin"><span data-i18n="cta.book">Termin anfragen</span></a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menü"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#leistungen" data-i18n="nav.services">Leistungen</a>
+  <a href="#schwangerschaft" data-i18n="nav.pregnancy">Schwangerschaft</a>
+  <a href="#praxis" data-i18n="nav.about">Über uns</a>
+  <a href="#besuch" data-i18n="nav.visit">Sprechzeiten</a>
+  <a href="#faq" data-i18n="nav.faq">FAQ</a>
+  <a class="btn" href="#termin"><span data-i18n="cta.book">Termin anfragen</span></a>
+</div>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow fade" data-i18n="hero.eyebrow">Gynäkologie in Bern</span>
+      <h1>
+        <span class="line"><span data-i18n="hero.l1">Frauengesundheit,</span></span>
+        <span class="line"><span data-i18n="hero.l2">mit Zeit und</span></span>
+        <span class="line"><span data-i18n="hero.l3"><em>Zuwendung</em> begleitet.</span></span>
+      </h1>
+      <p class="lede fade d2" data-i18n="hero.lede">Von der ersten Vorsorge über die Schwangerschaft bis in die Wechseljahre: Wir nehmen uns Zeit für Ihre Fragen und erklären jeden Schritt. Auf Deutsch, Französisch oder Englisch.</p>
+      <div class="hero-cta fade d3">
+        <a class="btn" href="#termin"><span data-i18n="cta.book">Termin anfragen</span><span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#leistungen"><span data-i18n="cta.services">Unsere Leistungen</span></a>
+      </div>
+      <ul class="chips fade d3">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l4 4 10-10"/></svg><span data-i18n="chip.kvg">Grundversicherung (KVG)</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l4 4 10-10"/></svg><span data-i18n="chip.new">Neue Patientinnen willkommen</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l4 4 10-10"/></svg><span data-i18n="chip.access">Rollstuhlgängig</span></li>
+      </ul>
+    </div>
+
+    <div class="arch-stage" aria-hidden="true">
+      <div class="arch-ring"></div>
+      <div class="arch">
+        <canvas id="ripples"></canvas>
+        <svg class="botanic" viewBox="0 0 300 380">
+          <path d="M150 380 C150 300 146 230 156 150 C162 100 150 60 150 40"/>
+          <path class="leaf" d="M153 250 C120 240 92 214 84 180 C118 186 144 210 153 250"/>
+          <path class="leaf l2" d="M155 200 C188 192 214 166 220 132 C186 140 162 166 155 200"/>
+          <path class="leaf l3" d="M154 150 C128 140 110 116 108 90 C134 98 150 120 154 150"/>
+          <path class="leaf l4" d="M151 305 C186 298 216 276 228 244 C192 248 162 272 151 305"/>
+          <circle cx="150" cy="36" r="13"/>
+        </svg>
+      </div>
+      <div class="float-card fc-1">
+        <span class="dot" id="fc-dot"></span>
+        <div><b id="fc-status">Heute geöffnet</b><span id="fc-hours">08:00–12:00 · 14:00–18:00</span></div>
+      </div>
+      <div class="float-card fc-2">
+        <div><span class="langs-mini">DE · FR · EN</span><br><span data-i18n="hero.langs">Sprechstunde in 3 Sprachen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="values" aria-hidden="true">
+  <div class="marquee">
+    <ul data-marquee>
+      <li data-i18n="v.1">Zeit für Ihre Fragen</li><li data-i18n="v.2">Diskret &amp; vertraulich</li><li data-i18n="v.3">Moderne Ultraschalldiagnostik</li><li data-i18n="v.4">Auf Augenhöhe</li><li data-i18n="v.5">In jeder Lebensphase</li>
+    </ul>
+  </div>
+</div>
+
+<section id="leistungen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow" data-i18n="s.eyebrow">Leistungen</span>
+        <h2 data-i18n="s.title">Medizin für <em>jede</em> Lebensphase</h2>
+      </div>
+      <p class="lede" data-i18n="s.lede">Wir betreuen Mädchen und Frauen jeden Alters, von der ersten Konsultation bis zur Nachsorge. Die meisten Untersuchungen führen wir direkt in der Praxis durch.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></span>
+        <h3 data-i18n="sv.1.t">Jahreskontrolle &amp; Vorsorge</h3>
+        <p data-i18n="sv.1.d">Krebsvorsorge mit Zellabstrich (PAP) und HPV-Test, Brustuntersuchung und Beratung.</p>
+        <span class="tag" data-i18n="sv.1.k">Prävention</span>
+      </article>
+      <article class="service">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="7" r="3"/><path d="M8 21v-5a4 4 0 0 1 4-4 5 5 0 0 1 5 5 4 4 0 0 1-4 4z"/></svg></span>
+        <h3 data-i18n="sv.2.t">Schwangerschaft</h3>
+        <p data-i18n="sv.2.d">Kontrollen, Ultraschall-Screenings und Pränataltests, in enger Zusammenarbeit mit Hebammen.</p>
+        <span class="tag" data-i18n="sv.2.k">Geburtshilfe</span>
+      </article>
+      <article class="service">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span>
+        <h3 data-i18n="sv.3.t">Kinderwunsch</h3>
+        <p data-i18n="sv.3.d">Zyklusmonitoring, Hormonabklärung und einfühlsame Begleitung auf Ihrem Weg.</p>
+        <span class="tag" data-i18n="sv.3.k">Fertilität</span>
+      </article>
+      <article class="service">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 4h12M12 4v16M8 20h8"/><path d="M6 4c0 3 2 5 6 5s6-2 6-5"/></svg></span>
+        <h3 data-i18n="sv.4.t">Verhütung</h3>
+        <p data-i18n="sv.4.d">Persönliche Beratung zu allen Methoden, Einlage von Spirale und Hormonimplantat.</p>
+        <span class="tag" data-i18n="sv.4.k">Beratung</span>
+      </article>
+      <article class="service">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2"/></svg></span>
+        <h3 data-i18n="sv.5.t">Wechseljahre</h3>
+        <p data-i18n="sv.5.d">Hilfe bei Hitzewallungen, Schlafstörungen und Stimmungsschwankungen, mit und ohne Hormone.</p>
+        <span class="tag" data-i18n="sv.5.k">Menopause</span>
+      </article>
+      <article class="service">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/><circle cx="12" cy="8" r="4"/></svg></span>
+        <h3 data-i18n="sv.6.t">Mädchensprechstunde</h3>
+        <p data-i18n="sv.6.d">Ein erstes Gespräch in ruhiger Atmosphäre, meist ganz ohne Untersuchung.</p>
+        <span class="tag" data-i18n="sv.6.k">Jugendliche</span>
+      </article>
+      <article class="service">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 16a10 10 0 0 1 16 0"/><path d="M7 16a6 6 0 0 1 10 0"/><path d="M10 16a2.5 2.5 0 0 1 4 0"/></svg></span>
+        <h3 data-i18n="sv.7.t">Ultraschall</h3>
+        <p data-i18n="sv.7.d">Hochauflösender 2D-, 3D- und 4D-Ultraschall für Gynäkologie und Schwangerschaft.</p>
+        <span class="tag" data-i18n="sv.7.k">Diagnostik</span>
+      </article>
+      <article class="service">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>
+        <h3 data-i18n="sv.8.t">Endometriose &amp; Zyklus</h3>
+        <p data-i18n="sv.8.d">Abklärung und Behandlung bei starken Schmerzen, unregelmässigen Blutungen oder PCOS.</p>
+        <span class="tag" data-i18n="sv.8.k">Spezialsprechstunde</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="pregnancy" id="schwangerschaft">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow" data-i18n="p.eyebrow">Schwangerschaft</span>
+        <h2 data-i18n="p.title">Neun Monate, <em>gut begleitet</em></h2>
+      </div>
+      <p class="lede" data-i18n="p.lede">So sieht die Betreuung in einer unkomplizierten Schwangerschaft bei uns aus. Den genauen Plan besprechen wir beim ersten Termin gemeinsam.</p>
+    </div>
+    <div class="journey" id="journey">
+      <div class="track"><i></i></div>
+      <div class="stop"><div class="wk"><small data-i18n="p.week">Woche</small>6–10</div><h3 data-i18n="p.1.t">Erster Termin</h3><p data-i18n="p.1.d">Bestätigung der Schwangerschaft, Blutentnahme und Ihr Fragen-Gespräch.</p></div>
+      <div class="stop"><div class="wk"><small data-i18n="p.week">Woche</small>11–14</div><h3 data-i18n="p.2.t">1. Ultraschall</h3><p data-i18n="p.2.d">Ersttrimestertest und auf Wunsch nicht-invasiver Pränataltest (NIPT).</p></div>
+      <div class="stop"><div class="wk"><small data-i18n="p.week">Woche</small>20–23</div><h3 data-i18n="p.3.t">2. Ultraschall</h3><p data-i18n="p.3.d">Detaillierte Untersuchung der Organe und des Wachstums Ihres Kindes.</p></div>
+      <div class="stop"><div class="wk"><small data-i18n="p.week">Woche</small>24–28</div><h3 data-i18n="p.4.t">Zuckertest</h3><p data-i18n="p.4.d">Test auf Schwangerschaftsdiabetes sowie Kontrolle von Blutdruck und Blutwerten.</p></div>
+      <div class="stop"><div class="wk"><small data-i18n="p.week">Woche</small>30–36</div><h3 data-i18n="p.5.t">Geburtsvorbereitung</h3><p data-i18n="p.5.d">Wachstumskontrolle, CTG und Planung der Geburt mit Ihrer Wunschklinik.</p></div>
+      <div class="stop"><div class="wk"><small data-i18n="p.after">Nach der Geburt</small>+6</div><h3 data-i18n="p.6.t">Nachkontrolle</h3><p data-i18n="p.6.d">Rückbildung, Stillen, Verhütung und alles, was Sie beschäftigt.</p></div>
+    </div>
+    <div class="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+      <p data-i18n="p.note">In der Schweiz übernimmt die Grundversicherung ab der 13. Schwangerschaftswoche die Kosten für die Kontrollen ohne Franchise und Selbstbehalt. Gerne erklären wir Ihnen die Details.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="praxis">
+  <div class="wrap">
+    <div class="portrait" aria-hidden="true">
+      <span class="ph" data-i18n="a.photo">Foto folgt</span>
+      <svg viewBox="0 0 400 420" fill="currentColor"><circle cx="200" cy="170" r="74" opacity=".85"/><path d="M60 420c10-100 70-150 140-150s130 50 140 150z" opacity=".85"/></svg>
+    </div>
+    <div>
+      <span class="eyebrow" data-i18n="a.eyebrow">Über uns</span>
+      <h2 style="margin-top:16px">Dr. med. Sophie Martin</h2>
+      <p style="color:var(--ink-2);margin-top:8px" data-i18n="a.role">Fachärztin für Gynäkologie und Geburtshilfe FMH</p>
+      <blockquote data-i18n="a.quote">Eine gute Behandlung beginnt mit Zuhören. Sie sollen sich bei uns sicher fühlen und jede Entscheidung verstehen.</blockquote>
+      <p class="lede" data-i18n="a.bio">Nach Jahren an Universitätsspitälern in der Deutsch- und Westschweiz habe ich eine Praxis gegründet, in der Medizin auf dem neuesten Stand und eine persönliche Atmosphäre zusammengehören.</p>
+      <ul class="cv">
+        <li><b data-i18n="a.cv1.k">Fachgebiet</b><span data-i18n="a.cv1.v">Gynäkologie &amp; Geburtshilfe FMH</span></li>
+        <li><b data-i18n="a.cv2.k">Schwerpunkte</b><span data-i18n="a.cv2.v">Ultraschall (SGUM), Endometriose, Schwangerschaft</span></li>
+        <li><b data-i18n="a.cv3.k">Sprachen</b><span data-i18n="a.cv3.v">Deutsch, Französisch, Englisch</span></li>
+      </ul>
+      <p class="sig">Sophie Martin</p>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="besuch">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow" data-i18n="h.eyebrow">Besuch</span>
+        <h2 data-i18n="h.title">Wir sind <em>für Sie</em> da</h2>
+      </div>
+      <p class="lede" data-i18n="h.lede">Termine vereinbaren Sie telefonisch oder über das Formular. Wir melden uns innerhalb eines Arbeitstages.</p>
+    </div>
+    <div class="grid">
+      <div class="panel">
+        <div class="status" id="status"><span class="dot"></span><span id="status-text">Jetzt geöffnet</span></div>
+        <h3 style="margin-bottom:10px" data-i18n="h.hours">Sprechzeiten</h3>
+        <table class="hours" id="hours"><tbody></tbody></table>
+        <ul class="contact-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><small data-i18n="h.addr">Adresse</small>Musterstrasse 12, 3011 Bern</div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><div><small data-i18n="h.phone">Telefon</small><a href="tel:+41310000000">+41 31 000 00 00</a></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><small>E-Mail</small><a href="mailto:praxis@praxis-lumen.ch">praxis@praxis-lumen.ch</a></div></li>
+        </ul>
+        <div class="emergency"><strong>144</strong><span data-i18n="h.emergency">Bei einem Notfall ausserhalb der Sprechzeiten wählen Sie 144 oder wenden Sie sich an die Frauenklinik des Inselspitals.</span></div>
+      </div>
+
+      <div class="panel form-panel" id="termin">
+        <div id="form-wrap">
+          <h3 data-i18n="f.title">Termin anfragen</h3>
+          <p class="sub" data-i18n="f.sub">Wir rufen Sie zurück, um einen passenden Termin zu finden.</p>
+          <form class="form" id="form" novalidate>
+            <div class="field"><label for="f-name" data-i18n="f.name">Name</label><input id="f-name" name="name" required autocomplete="name"></div>
+            <div class="field"><label for="f-phone" data-i18n="f.phone">Telefon</label><input id="f-phone" name="phone" type="tel" required autocomplete="tel"></div>
+            <div class="field full"><label for="f-email" data-i18n="f.email">E-Mail</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+            <div class="field"><label for="f-reason" data-i18n="f.reason">Anliegen</label>
+              <select id="f-reason" name="reason">
+                <option data-i18n="f.r1">Jahreskontrolle</option>
+                <option data-i18n="f.r2">Schwangerschaft</option>
+                <option data-i18n="f.r3">Verhütung</option>
+                <option data-i18n="f.r4">Beschwerden</option>
+                <option data-i18n="f.r5">Anderes</option>
+              </select></div>
+            <div class="field"><label for="f-lang" data-i18n="f.lang">Sprache</label>
+              <select id="f-lang" name="lang"><option>Deutsch</option><option>Français</option><option>English</option></select></div>
+            <div class="field full"><label for="f-msg" data-i18n="f.msg">Nachricht (optional)</label><textarea id="f-msg" name="msg"></textarea></div>
+            <label class="consent" for="f-consent"><input type="checkbox" id="f-consent" required><span data-i18n="f.consent">Ich bin einverstanden, dass die Praxis mich zur Terminvereinbarung kontaktiert.</span></label>
+            <button class="btn" type="submit"><span data-i18n="f.send">Anfrage senden</span><span class="arrow" aria-hidden="true">→</span></button>
+          </form>
+        </div>
+        <div class="success" id="success" hidden>
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="32" cy="32" r="29" opacity=".35"/><path d="M20 33l8 8 16-17" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 data-i18n="f.ok">Vielen Dank!</h3>
+          <p data-i18n="f.okd">Wir melden uns innerhalb eines Arbeitstages bei Ihnen.</p>
+          <p style="margin-top:14px;font-size:.8rem;opacity:.6" data-i18n="f.demo">Vorschau: Das Formular ist noch nicht mit der Praxis verbunden.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow" data-i18n="q.eyebrow">Häufige Fragen</span>
+        <h2 data-i18n="q.title">Gut zu <em>wissen</em></h2>
+      </div>
+    </div>
+    <div class="faq-list">
+      <details><summary><span data-i18n="q.1.q">Nehmen Sie neue Patientinnen auf?</span><span class="pm"></span></summary><div class="ans"><p data-i18n="q.1.a">Ja. Rufen Sie uns an oder nutzen Sie das Formular. Für Schwangere und akute Beschwerden finden wir kurzfristig einen Termin.</p></div></details>
+      <details><summary><span data-i18n="q.2.q">Was nehme ich zum ersten Termin mit?</span><span class="pm"></span></summary><div class="ans"><p data-i18n="q.2.a">Ihre Versichertenkarte, eine Liste Ihrer Medikamente und, falls vorhanden, frühere Befunde. Notieren Sie sich gerne vorher Ihre Fragen.</p></div></details>
+      <details><summary><span data-i18n="q.3.q">Werden die Kosten von der Krankenkasse übernommen?</span><span class="pm"></span></summary><div class="ans"><p data-i18n="q.3.a">Wir rechnen über die Grundversicherung (KVG) ab. Die gynäkologische Vorsorge wird übernommen; es gelten Ihre Franchise und der Selbstbehalt.</p></div></details>
+      <details><summary><span data-i18n="q.4.q">Kann ich während der Periode kommen?</span><span class="pm"></span></summary><div class="ans"><p data-i18n="q.4.a">Für ein Gespräch oder einen Ultraschall ja. Für den Krebsabstrich ist ein Termin ausserhalb der Blutung besser. Rufen Sie uns im Zweifel kurz an.</p></div></details>
+      <details><summary><span data-i18n="q.5.q">Darf ich eine Begleitperson mitbringen?</span><span class="pm"></span></summary><div class="ans"><p data-i18n="q.5.a">Selbstverständlich. Partnerin, Partner, Freundin oder Dolmetscherin sind jederzeit willkommen.</p></div></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div><p class="big" data-i18n="ft.big">Wir freuen uns auf <em>Ihren Besuch.</em></p></div>
+      <div><h4 data-i18n="ft.practice">Praxis</h4><ul><li>Musterstrasse 12</li><li>3011 Bern</li><li>+41 31 000 00 00</li></ul></div>
+      <div><h4 data-i18n="ft.legal">Rechtliches</h4><ul><li><a href="#top" data-i18n="ft.imprint">Impressum</a></li><li><a href="#top" data-i18n="ft.privacy">Datenschutz</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+    </div>
+    <div class="bottom"><span>© <span id="year">2026</span> Praxis Lumen</span><span data-i18n="ft.member">Mitglied FMH · gynécologie suisse</span></div>
+  </div>
+</footer>
+
+<div class="mobile-cta" id="mobile-cta">
+  <a class="btn" href="#termin"><span data-i18n="cta.book">Termin anfragen</span></a>
+  <a class="btn ghost" href="tel:+41310000000" aria-label="Anrufen"><span>☎</span></a>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- Translations ---------- */
+const T = {
+de:{
+ "brand.sub":"Frauenheilkunde & Geburtshilfe","nav.services":"Leistungen","nav.pregnancy":"Schwangerschaft","nav.about":"Über uns","nav.visit":"Sprechzeiten","nav.faq":"FAQ",
+ "cta.book":"Termin anfragen","cta.services":"Unsere Leistungen",
+ "hero.eyebrow":"Gynäkologie in Bern","hero.l1":"Frauengesundheit,","hero.l2":"mit Zeit und","hero.l3":"<em>Zuwendung</em> begleitet.",
+ "hero.lede":"Von der ersten Vorsorge über die Schwangerschaft bis in die Wechseljahre: Wir nehmen uns Zeit für Ihre Fragen und erklären jeden Schritt. Auf Deutsch, Französisch oder Englisch.",
+ "hero.langs":"Sprechstunde in 3 Sprachen","chip.kvg":"Grundversicherung (KVG)","chip.new":"Neue Patientinnen willkommen","chip.access":"Rollstuhlgängig",
+ "v.1":"Zeit für Ihre Fragen","v.2":"Diskret & vertraulich","v.3":"Moderne Ultraschalldiagnostik","v.4":"Auf Augenhöhe","v.5":"In jeder Lebensphase",
+ "s.eyebrow":"Leistungen","s.title":"Medizin für <em>jede</em> Lebensphase","s.lede":"Wir betreuen Mädchen und Frauen jeden Alters, von der ersten Konsultation bis zur Nachsorge. Die meisten Untersuchungen führen wir direkt in der Praxis durch.",
+ "sv.1.t":"Jahreskontrolle & Vorsorge","sv.1.d":"Krebsvorsorge mit Zellabstrich (PAP) und HPV-Test, Brustuntersuchung und Beratung.","sv.1.k":"Prävention",
+ "sv.2.t":"Schwangerschaft","sv.2.d":"Kontrollen, Ultraschall-Screenings und Pränataltests, in enger Zusammenarbeit mit Hebammen.","sv.2.k":"Geburtshilfe",
+ "sv.3.t":"Kinderwunsch","sv.3.d":"Zyklusmonitoring, Hormonabklärung und einfühlsame Begleitung auf Ihrem Weg.","sv.3.k":"Fertilität",
+ "sv.4.t":"Verhütung","sv.4.d":"Persönliche Beratung zu allen Methoden, Einlage von Spirale und Hormonimplantat.","sv.4.k":"Beratung",
+ "sv.5.t":"Wechseljahre","sv.5.d":"Hilfe bei Hitzewallungen, Schlafstörungen und Stimmungsschwankungen, mit und ohne Hormone.","sv.5.k":"Menopause",
+ "sv.6.t":"Mädchensprechstunde","sv.6.d":"Ein erstes Gespräch in ruhiger Atmosphäre, meist ganz ohne Untersuchung.","sv.6.k":"Jugendliche",
+ "sv.7.t":"Ultraschall","sv.7.d":"Hochauflösender 2D-, 3D- und 4D-Ultraschall für Gynäkologie und Schwangerschaft.","sv.7.k":"Diagnostik",
+ "sv.8.t":"Endometriose & Zyklus","sv.8.d":"Abklärung und Behandlung bei starken Schmerzen, unregelmässigen Blutungen oder PCOS.","sv.8.k":"Spezialsprechstunde",
+ "p.eyebrow":"Schwangerschaft","p.title":"Neun Monate, <em>gut begleitet</em>","p.lede":"So sieht die Betreuung in einer unkomplizierten Schwangerschaft bei uns aus. Den genauen Plan besprechen wir beim ersten Termin gemeinsam.",
+ "p.week":"Woche","p.after":"Wochen danach",
+ "p.1.t":"Erster Termin","p.1.d":"Bestätigung der Schwangerschaft, Blutentnahme und Ihr Fragen-Gespräch.",
+ "p.2.t":"1. Ultraschall","p.2.d":"Ersttrimestertest und auf Wunsch nicht-invasiver Pränataltest (NIPT).",
+ "p.3.t":"2. Ultraschall","p.3.d":"Detaillierte Untersuchung der Organe und des Wachstums Ihres Kindes.",
+ "p.4.t":"Zuckertest","p.4.d":"Test auf Schwangerschaftsdiabetes sowie Kontrolle von Blutdruck und Blutwerten.",
+ "p.5.t":"Geburtsvorbereitung","p.5.d":"Wachstumskontrolle, CTG und Planung der Geburt mit Ihrer Wunschklinik.",
+ "p.6.t":"Nachkontrolle","p.6.d":"Rückbildung, Stillen, Verhütung und alles, was Sie beschäftigt.",
+ "p.note":"In der Schweiz übernimmt die Grundversicherung ab der 13. Schwangerschaftswoche die Kosten für die Kontrollen ohne Franchise und Selbstbehalt. Gerne erklären wir Ihnen die Details.",
+ "a.photo":"Foto folgt","a.eyebrow":"Über uns","a.role":"Fachärztin für Gynäkologie und Geburtshilfe FMH",
+ "a.quote":"Eine gute Behandlung beginnt mit Zuhören. Sie sollen sich bei uns sicher fühlen und jede Entscheidung verstehen.",
+ "a.bio":"Nach Jahren an Universitätsspitälern in der Deutsch- und Westschweiz habe ich eine Praxis gegründet, in der Medizin auf dem neuesten Stand und eine persönliche Atmosphäre zusammengehören.",
+ "a.cv1.k":"Fachgebiet","a.cv1.v":"Gynäkologie & Geburtshilfe FMH","a.cv2.k":"Schwerpunkte","a.cv2.v":"Ultraschall (SGUM), Endometriose, Schwangerschaft","a.cv3.k":"Sprachen","a.cv3.v":"Deutsch, Französisch, Englisch",
+ "h.eyebrow":"Besuch","h.title":"Wir sind <em>für Sie</em> da","h.lede":"Termine vereinbaren Sie telefonisch oder über das Formular. Wir melden uns innerhalb eines Arbeitstages.",
+ "h.hours":"Sprechzeiten","h.addr":"Adresse","h.phone":"Telefon","h.emergency":"Bei einem Notfall ausserhalb der Sprechzeiten wählen Sie 144 oder wenden Sie sich an die Frauenklinik des Inselspitals.",
+ "h.open":"Jetzt geöffnet","h.closed":"Derzeit geschlossen","h.todayOpen":"Heute geöffnet","h.todayClosed":"Heute geschlossen","h.closedDay":"geschlossen","h.opensAt":"Öffnet {d} um {t}",
+ "days":["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"],
+ "f.title":"Termin anfragen","f.sub":"Wir rufen Sie zurück, um einen passenden Termin zu finden.","f.name":"Name","f.phone":"Telefon","f.email":"E-Mail","f.reason":"Anliegen",
+ "f.r1":"Jahreskontrolle","f.r2":"Schwangerschaft","f.r3":"Verhütung","f.r4":"Beschwerden","f.r5":"Anderes","f.lang":"Sprache","f.msg":"Nachricht (optional)",
+ "f.consent":"Ich bin einverstanden, dass die Praxis mich zur Terminvereinbarung kontaktiert.","f.send":"Anfrage senden","f.ok":"Vielen Dank!","f.okd":"Wir melden uns innerhalb eines Arbeitstages bei Ihnen.",
+ "f.demo":"Vorschau: Das Formular ist noch nicht mit der Praxis verbunden.",
+ "q.eyebrow":"Häufige Fragen","q.title":"Gut zu <em>wissen</em>",
+ "q.1.q":"Nehmen Sie neue Patientinnen auf?","q.1.a":"Ja. Rufen Sie uns an oder nutzen Sie das Formular. Für Schwangere und akute Beschwerden finden wir kurzfristig einen Termin.",
+ "q.2.q":"Was nehme ich zum ersten Termin mit?","q.2.a":"Ihre Versichertenkarte, eine Liste Ihrer Medikamente und, falls vorhanden, frühere Befunde. Notieren Sie sich gerne vorher Ihre Fragen.",
+ "q.3.q":"Werden die Kosten von der Krankenkasse übernommen?","q.3.a":"Wir rechnen über die Grundversicherung (KVG) ab. Die gynäkologische Vorsorge wird übernommen; es gelten Ihre Franchise und der Selbstbehalt.",
+ "q.4.q":"Kann ich während der Periode kommen?","q.4.a":"Für ein Gespräch oder einen Ultraschall ja. Für den Krebsabstrich ist ein Termin ausserhalb der Blutung besser. Rufen Sie uns im Zweifel kurz an.",
+ "q.5.q":"Darf ich eine Begleitperson mitbringen?","q.5.a":"Selbstverständlich. Partnerin, Partner, Freundin oder Dolmetscherin sind jederzeit willkommen.",
+ "ft.big":"Wir freuen uns auf <em>Ihren Besuch.</em>","ft.practice":"Praxis","ft.legal":"Rechtliches","ft.imprint":"Impressum","ft.privacy":"Datenschutz","ft.member":"Mitglied FMH · gynécologie suisse"
+},
+fr:{
+ "brand.sub":"Gynécologie & obstétrique","nav.services":"Prestations","nav.pregnancy":"Grossesse","nav.about":"À propos","nav.visit":"Horaires","nav.faq":"FAQ",
+ "cta.book":"Prendre rendez-vous","cta.services":"Nos prestations",
+ "hero.eyebrow":"Gynécologie à Berne","hero.l1":"La santé des femmes,","hero.l2":"accompagnée avec","hero.l3":"temps et <em>bienveillance</em>.",
+ "hero.lede":"Du premier contrôle à la ménopause, en passant par la grossesse : nous prenons le temps de répondre à vos questions et d’expliquer chaque étape. En français, en allemand ou en anglais.",
+ "hero.langs":"Consultations en 3 langues","chip.kvg":"Assurance de base (LAMal)","chip.new":"Nouvelles patientes bienvenues","chip.access":"Accès en fauteuil roulant",
+ "v.1":"Du temps pour vos questions","v.2":"Discrétion & confidentialité","v.3":"Échographie de pointe","v.4":"Une relation d’égal à égal","v.5":"À chaque étape de la vie",
+ "s.eyebrow":"Prestations","s.title":"Une médecine pour <em>chaque</em> étape de la vie","s.lede":"Nous accompagnons les jeunes filles et les femmes de tout âge, de la première consultation au suivi. La plupart des examens se font directement au cabinet.",
+ "sv.1.t":"Contrôle annuel & prévention","sv.1.d":"Dépistage du cancer par frottis (PAP) et test HPV, examen des seins et conseils.","sv.1.k":"Prévention",
+ "sv.2.t":"Grossesse","sv.2.d":"Contrôles, échographies de dépistage et tests prénataux, en étroite collaboration avec les sages-femmes.","sv.2.k":"Obstétrique",
+ "sv.3.t":"Désir d’enfant","sv.3.d":"Monitorage du cycle, bilan hormonal et accompagnement attentif tout au long du chemin.","sv.3.k":"Fertilité",
+ "sv.4.t":"Contraception","sv.4.d":"Conseil personnalisé sur toutes les méthodes, pose de stérilet et d’implant hormonal.","sv.4.k":"Conseil",
+ "sv.5.t":"Ménopause","sv.5.d":"Aide en cas de bouffées de chaleur, troubles du sommeil et sautes d’humeur, avec ou sans hormones.","sv.5.k":"Ménopause",
+ "sv.6.t":"Consultation ados","sv.6.d":"Un premier entretien dans une atmosphère calme, le plus souvent sans examen.","sv.6.k":"Adolescentes",
+ "sv.7.t":"Échographie","sv.7.d":"Échographie haute résolution 2D, 3D et 4D en gynécologie et pendant la grossesse.","sv.7.k":"Diagnostic",
+ "sv.8.t":"Endométriose & cycle","sv.8.d":"Bilan et traitement en cas de fortes douleurs, de saignements irréguliers ou de SOPK.","sv.8.k":"Consultation spécialisée",
+ "p.eyebrow":"Grossesse","p.title":"Neuf mois, <em>bien entourée</em>","p.lede":"Voici comment se déroule le suivi d’une grossesse sans complication chez nous. Nous établissons ensemble votre plan précis lors du premier rendez-vous.",
+ "p.week":"Semaine","p.after":"Semaines après",
+ "p.1.t":"Premier rendez-vous","p.1.d":"Confirmation de la grossesse, prise de sang et temps pour vos questions.",
+ "p.2.t":"1re échographie","p.2.d":"Test du premier trimestre et, si vous le souhaitez, test prénatal non invasif (NIPT).",
+ "p.3.t":"2e échographie","p.3.d":"Examen détaillé des organes et de la croissance de votre enfant.",
+ "p.4.t":"Test du glucose","p.4.d":"Dépistage du diabète gestationnel, contrôle de la tension et des analyses sanguines.",
+ "p.5.t":"Préparation à la naissance","p.5.d":"Contrôle de croissance, CTG et planification de l’accouchement avec la maternité de votre choix.",
+ "p.6.t":"Contrôle post-partum","p.6.d":"Rééducation, allaitement, contraception et tout ce qui vous préoccupe.",
+ "p.note":"En Suisse, dès la 13e semaine de grossesse, l’assurance de base prend en charge les contrôles sans franchise ni quote-part. Nous vous expliquons volontiers les détails.",
+ "a.photo":"Photo à venir","a.eyebrow":"À propos","a.role":"Spécialiste FMH en gynécologie et obstétrique",
+ "a.quote":"Un bon traitement commence par l’écoute. Vous devez vous sentir en confiance et comprendre chaque décision.",
+ "a.bio":"Après des années dans des hôpitaux universitaires de Suisse alémanique et romande, j’ai fondé un cabinet où une médecine de pointe va de pair avec une atmosphère personnelle.",
+ "a.cv1.k":"Spécialité","a.cv1.v":"Gynécologie & obstétrique FMH","a.cv2.k":"Domaines","a.cv2.v":"Échographie (SSUM), endométriose, grossesse","a.cv3.k":"Langues","a.cv3.v":"Allemand, français, anglais",
+ "h.eyebrow":"Visite","h.title":"Nous sommes là <em>pour vous</em>","h.lede":"Prenez rendez-vous par téléphone ou via le formulaire. Nous vous répondons dans un délai d’un jour ouvrable.",
+ "h.hours":"Horaires","h.addr":"Adresse","h.phone":"Téléphone","h.emergency":"En cas d’urgence en dehors des heures d’ouverture, composez le 144 ou adressez-vous à la maternité de l’Hôpital de l’Île.",
+ "h.open":"Ouvert maintenant","h.closed":"Actuellement fermé","h.todayOpen":"Ouvert aujourd’hui","h.todayClosed":"Fermé aujourd’hui","h.closedDay":"fermé","h.opensAt":"Ouvre {d} à {t}",
+ "days":["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"],
+ "f.title":"Prendre rendez-vous","f.sub":"Nous vous rappelons pour trouver un rendez-vous qui vous convient.","f.name":"Nom","f.phone":"Téléphone","f.email":"E-mail","f.reason":"Motif",
+ "f.r1":"Contrôle annuel","f.r2":"Grossesse","f.r3":"Contraception","f.r4":"Symptômes","f.r5":"Autre","f.lang":"Langue","f.msg":"Message (facultatif)",
+ "f.consent":"J’accepte que le cabinet me contacte pour fixer un rendez-vous.","f.send":"Envoyer la demande","f.ok":"Merci beaucoup !","f.okd":"Nous vous contactons dans un délai d’un jour ouvrable.",
+ "f.demo":"Aperçu : le formulaire n’est pas encore relié au cabinet.",
+ "q.eyebrow":"Questions fréquentes","q.title":"Bon à <em>savoir</em>",
+ "q.1.q":"Acceptez-vous de nouvelles patientes ?","q.1.a":"Oui. Appelez-nous ou utilisez le formulaire. Pour les femmes enceintes et les problèmes aigus, nous trouvons rapidement un rendez-vous.",
+ "q.2.q":"Que dois-je apporter au premier rendez-vous ?","q.2.a":"Votre carte d’assurance, la liste de vos médicaments et, le cas échéant, vos résultats antérieurs. N’hésitez pas à noter vos questions à l’avance.",
+ "q.3.q":"Les frais sont-ils pris en charge par la caisse-maladie ?","q.3.a":"Nous facturons via l’assurance de base (LAMal). Les examens de prévention gynécologique sont remboursés ; votre franchise et votre quote-part s’appliquent.",
+ "q.4.q":"Puis-je venir pendant mes règles ?","q.4.a":"Pour un entretien ou une échographie, oui. Pour le frottis, il vaut mieux venir en dehors des saignements. En cas de doute, appelez-nous.",
+ "q.5.q":"Puis-je venir accompagnée ?","q.5.a":"Bien sûr. Partenaire, amie ou interprète sont toujours les bienvenus.",
+ "ft.big":"Au plaisir de <em>vous accueillir.</em>","ft.practice":"Cabinet","ft.legal":"Mentions légales","ft.imprint":"Impressum","ft.privacy":"Protection des données","ft.member":"Membre FMH · gynécologie suisse"
+},
+en:{
+ "brand.sub":"Gynaecology & Obstetrics","nav.services":"Services","nav.pregnancy":"Pregnancy","nav.about":"About","nav.visit":"Opening hours","nav.faq":"FAQ",
+ "cta.book":"Request appointment","cta.services":"Our services",
+ "hero.eyebrow":"Gynaecology in Bern","hero.l1":"Women’s health,","hero.l2":"cared for with time","hero.l3":"and <em>attention</em>.",
+ "hero.lede":"From your first check-up through pregnancy to menopause, we take time for your questions and explain every step. In English, German or French.",
+ "hero.langs":"Consultations in 3 languages","chip.kvg":"Basic insurance (KVG)","chip.new":"New patients welcome","chip.access":"Wheelchair accessible",
+ "v.1":"Time for your questions","v.2":"Discreet & confidential","v.3":"State-of-the-art ultrasound","v.4":"Care as equals","v.5":"At every stage of life",
+ "s.eyebrow":"Services","s.title":"Care for <em>every</em> stage of life","s.lede":"We care for girls and women of all ages, from the first consultation to follow-up. Most examinations take place right here in the practice.",
+ "sv.1.t":"Annual check-up & screening","sv.1.d":"Cervical screening with Pap smear and HPV test, breast examination and advice.","sv.1.k":"Prevention",
+ "sv.2.t":"Pregnancy","sv.2.d":"Check-ups, ultrasound screenings and prenatal tests, in close collaboration with midwives.","sv.2.k":"Obstetrics",
+ "sv.3.t":"Fertility","sv.3.d":"Cycle monitoring, hormone assessment and caring support along your way.","sv.3.k":"Fertility",
+ "sv.4.t":"Contraception","sv.4.d":"Personal advice on every method, fitting of IUDs and hormonal implants.","sv.4.k":"Advice",
+ "sv.5.t":"Menopause","sv.5.d":"Help with hot flushes, sleep problems and mood changes, with or without hormones.","sv.5.k":"Menopause",
+ "sv.6.t":"Teen consultation","sv.6.d":"A first conversation in a calm setting, usually without any examination.","sv.6.k":"Adolescents",
+ "sv.7.t":"Ultrasound","sv.7.d":"High-resolution 2D, 3D and 4D ultrasound for gynaecology and pregnancy.","sv.7.k":"Diagnostics",
+ "sv.8.t":"Endometriosis & cycle","sv.8.d":"Assessment and treatment of severe pain, irregular bleeding or PCOS.","sv.8.k":"Specialist clinic",
+ "p.eyebrow":"Pregnancy","p.title":"Nine months, <em>well supported</em>","p.lede":"This is what care for an uncomplicated pregnancy looks like with us. We agree your exact plan together at the first appointment.",
+ "p.week":"Week","p.after":"Weeks after birth",
+ "p.1.t":"First appointment","p.1.d":"Confirming the pregnancy, blood tests and time for your questions.",
+ "p.2.t":"1st ultrasound","p.2.d":"First-trimester screening and, if you wish, non-invasive prenatal testing (NIPT).",
+ "p.3.t":"2nd ultrasound","p.3.d":"A detailed scan of your baby’s organs and growth.",
+ "p.4.t":"Glucose test","p.4.d":"Screening for gestational diabetes, plus blood pressure and blood checks.",
+ "p.5.t":"Preparing for birth","p.5.d":"Growth checks, CTG and planning the birth with your chosen hospital.",
+ "p.6.t":"Postnatal check","p.6.d":"Recovery, breastfeeding, contraception and anything on your mind.",
+ "p.note":"In Switzerland, from week 13 of pregnancy basic insurance covers check-ups with no deductible or co-payment. We are happy to explain the details.",
+ "a.photo":"Photo coming soon","a.eyebrow":"About","a.role":"FMH specialist in gynaecology and obstetrics",
+ "a.quote":"Good care begins with listening. You should feel safe with us and understand every decision.",
+ "a.bio":"After years at university hospitals in German- and French-speaking Switzerland, I founded a practice where up-to-date medicine and a personal atmosphere belong together.",
+ "a.cv1.k":"Specialty","a.cv1.v":"Gynaecology & obstetrics FMH","a.cv2.k":"Focus","a.cv2.v":"Ultrasound (SGUM), endometriosis, pregnancy","a.cv3.k":"Languages","a.cv3.v":"German, French, English",
+ "h.eyebrow":"Visit","h.title":"We are here <em>for you</em>","h.lede":"Book by phone or with the form. We get back to you within one working day.",
+ "h.hours":"Opening hours","h.addr":"Address","h.phone":"Phone","h.emergency":"For emergencies outside opening hours, call 144 or go to the women’s clinic at Inselspital.",
+ "h.open":"Open now","h.closed":"Closed now","h.todayOpen":"Open today","h.todayClosed":"Closed today","h.closedDay":"closed","h.opensAt":"Opens {d} at {t}",
+ "days":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+ "f.title":"Request an appointment","f.sub":"We will call you back to find a time that suits you.","f.name":"Name","f.phone":"Phone","f.email":"Email","f.reason":"Reason",
+ "f.r1":"Annual check-up","f.r2":"Pregnancy","f.r3":"Contraception","f.r4":"Symptoms","f.r5":"Other","f.lang":"Language","f.msg":"Message (optional)",
+ "f.consent":"I agree that the practice may contact me to arrange an appointment.","f.send":"Send request","f.ok":"Thank you!","f.okd":"We will get back to you within one working day.",
+ "f.demo":"Preview: this form is not yet connected to the practice.",
+ "q.eyebrow":"Frequently asked","q.title":"Good to <em>know</em>",
+ "q.1.q":"Are you taking new patients?","q.1.a":"Yes. Call us or use the form. For pregnant women and acute symptoms we find an appointment at short notice.",
+ "q.2.q":"What should I bring to my first appointment?","q.2.a":"Your insurance card, a list of your medication and any earlier results. It helps to write down your questions beforehand.",
+ "q.3.q":"Is the cost covered by health insurance?","q.3.a":"We bill through basic insurance (KVG). Gynaecological screening is covered; your deductible and co-payment apply.",
+ "q.4.q":"Can I come during my period?","q.4.a":"For a consultation or an ultrasound, yes. A Pap smear is best done outside your period. If unsure, just give us a call.",
+ "q.5.q":"May I bring someone with me?","q.5.a":"Of course. A partner, a friend or an interpreter is always welcome.",
+ "ft.big":"We look forward to <em>seeing you.</em>","ft.practice":"Practice","ft.legal":"Legal","ft.imprint":"Legal notice","ft.privacy":"Privacy","ft.member":"Member FMH · gynécologie suisse"
+}};
+
+/* Opening hours: [weekday 0=Mon] -> list of [open, close] in minutes */
+const HOURS = [
+  [[480,720],[840,1080]], // Mon 08–12, 14–18
+  [[480,720],[840,1080]], // Tue
+  [[480,780]],            // Wed 08–13
+  [[480,720],[840,1140]], // Thu 08–12, 14–19
+  [[480,780]],            // Fri 08–13
+  [],[]
+];
+const fmt = m => String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
+const fmtDay = d => d.length ? d.map(r=>fmt(r[0])+"–"+fmt(r[1])).join(" · ") : null;
+
+let lang = "de";
+const store = {get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+function applyLang(l){
+  lang = T[l] ? l : "de";
+  const d = T[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const v = d[el.dataset.i18n]; if (typeof v === "string") el.innerHTML = v.replace(/&(?!amp;)/g,"&amp;");
+  });
+  document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.lang===lang)));
+  const mq = document.querySelector("[data-marquee]");
+  const clone = mq.parentNode.querySelector("[data-clone]"); if (clone) clone.remove();
+  const c = mq.cloneNode(true); c.removeAttribute("data-marquee"); c.setAttribute("data-clone",""); mq.parentNode.appendChild(c);
+  renderHours();
+  store.set("lumen-lang", lang);
+}
+
+function renderHours(){
+  const d = T[lang], now = new Date();
+  const wd = (now.getDay()+6)%7, mins = now.getHours()*60+now.getMinutes();
+  const tbody = document.querySelector("#hours tbody");
+  tbody.innerHTML = "";
+  HOURS.forEach((h,i)=>{
+    const tr = document.createElement("tr"); if (i===wd) tr.className = "today";
+    const a = document.createElement("td"); a.textContent = d.days[i];
+    const b = document.createElement("td"); b.textContent = fmtDay(h) || d.closedDay || d["h.closedDay"];
+    tr.append(a,b); tbody.append(tr);
+  });
+  const open = HOURS[wd].some(r=>mins>=r[0]&&mins<r[1]);
+  const status = document.getElementById("status");
+  status.classList.toggle("closed", !open);
+  let txt = open ? d["h.open"] : d["h.closed"];
+  if (!open){
+    for (let k=0;k<8;k++){
+      const day=(wd+k)%7; const slot=HOURS[day].find(r=>k>0||r[0]>mins);
+      if (slot){ txt += " · " + d["h.opensAt"].replace("{d}", d.days[day]).replace("{t}", fmt(slot[0])); break; }
+    }
+  }
+  document.getElementById("status-text").textContent = txt;
+  const today = fmtDay(HOURS[wd]);
+  document.getElementById("fc-status").textContent = today ? d["h.todayOpen"] : d["h.todayClosed"];
+  document.getElementById("fc-hours").textContent = today || d.days[0]+" "+fmtDay(HOURS[0]);
+  document.getElementById("fc-dot").classList.toggle("closed", !open);
+}
+
+document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click",()=>applyLang(b.dataset.lang)));
+const saved = store.get("lumen-lang");
+const nav = (navigator.language||"de").slice(0,2);
+applyLang(saved || (T[nav] ? nav : "de"));
+setInterval(renderHours, 60000);
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ---------- Header, menu, mobile CTA ---------- */
+const header = document.querySelector(".header"), cta = document.getElementById("mobile-cta");
+const burger = document.querySelector(".burger"), menu = document.getElementById("mobile-menu");
+function onScroll(){
+  const y = window.scrollY;
+  header.classList.toggle("scrolled", y>20);
+  cta.classList.toggle("show", y>500);
+  updateJourney();
+}
+window.addEventListener("scroll", onScroll, {passive:true});
+function toggleMenu(open){
+  burger.setAttribute("aria-expanded", String(open));
+  menu.classList.toggle("open", open);
+  document.body.style.overflow = open ? "hidden" : "";
+}
+burger.addEventListener("click",()=>toggleMenu(burger.getAttribute("aria-expanded")!=="true"));
+menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>toggleMenu(false)));
+
+/* ---------- Pregnancy journey progress ---------- */
+const journey = document.getElementById("journey"), stops = journey.querySelectorAll(".stop"), bar = journey.querySelector(".track i");
+function updateJourney(){
+  const r = journey.getBoundingClientRect(), vh = window.innerHeight;
+  const p = Math.min(1, Math.max(0, (vh*0.85 - r.top) / (r.height + vh*0.35)));
+  bar.style.setProperty("--p", p.toFixed(3));
+  const w = window.innerWidth > 1020;
+  stops.forEach((s,i)=>{
+    const on = w ? p >= i/(stops.length-1) - 0.02 : s.getBoundingClientRect().top < vh*0.8;
+    s.classList.toggle("on", on);
+  });
+}
+
+/* ---------- Scroll reveal (below-the-fold only) ---------- */
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+if ("IntersectionObserver" in window && !reduce){
+  const targets = document.querySelectorAll(".sec-head, .service, .stop, .note, .portrait, .about .wrap > div:last-child, .panel, .faq-list details, footer .top > div");
+  const io = new IntersectionObserver(es=>es.forEach(e=>{
+    if (e.isIntersecting){ e.target.classList.add("reveal-in"); e.target.classList.remove("reveal-pending"); io.unobserve(e.target); }
+  }), {rootMargin:"0px 0px -8% 0px"});
+  targets.forEach(el=>{
+    if (el.getBoundingClientRect().top > window.innerHeight){
+      const sib = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+      el.style.setProperty("--d", (Math.min(sib,7)*0.07)+"s");
+      el.classList.add("reveal-pending"); io.observe(el);
+    }
+  });
+}
+
+/* ---------- FAQ: one open at a time ---------- */
+const dets = document.querySelectorAll(".faq-list details");
+dets.forEach(d=>d.addEventListener("toggle",()=>{ if (d.open) dets.forEach(o=>{ if (o!==d) o.open=false; }); }));
+
+/* ---------- Form ---------- */
+const form = document.getElementById("form");
+form.addEventListener("submit", e=>{
+  e.preventDefault();
+  const bad = [...form.querySelectorAll("[required]")].filter(i=> i.type==="checkbox" ? !i.checked : !i.value.trim());
+  form.querySelectorAll("[required]").forEach(i=>i.style.borderColor="");
+  if (bad.length){ bad.forEach(i=>{ if (i.type!=="checkbox") i.style.borderColor="var(--berry-soft)"; }); bad[0].focus(); return; }
+  document.getElementById("form-wrap").hidden = true;
+  document.getElementById("success").hidden = false;
+});
+
+/* ---------- Hero ripples (ultrasound-like rings) ---------- */
+const cv = document.getElementById("ripples"), ctx = cv.getContext("2d");
+let W=0,H=0,dpr=Math.min(2,window.devicePixelRatio||1);
+function size(){ const r=cv.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+size(); window.addEventListener("resize", size);
+function frame(t){
+  ctx.clearRect(0,0,W,H);
+  const cx=W*0.5, cy=H*0.1, max=Math.hypot(W,H);
+  for (let i=0;i<9;i++){
+    const r = ((t/60 + i*max/9) % max);
+    const a = 0.22*(1-r/max);
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.strokeStyle = "rgba(255,255,255,"+a.toFixed(3)+")"; ctx.lineWidth=1; ctx.stroke();
+  }
+  if (!reduce) requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* set dash lengths for the botanical line drawing */
+document.querySelectorAll(".botanic path").forEach(p=>p.style.setProperty("--len", Math.ceil(p.getTotalLength())));
+
+onScroll();
+})();
+</script>
+</body>
+</html>
